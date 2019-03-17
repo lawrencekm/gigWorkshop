@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
+            $table->string('facebook_id')->unique();
             $table->string('altemail');
             $table->string('password');
             $table->string('otp');

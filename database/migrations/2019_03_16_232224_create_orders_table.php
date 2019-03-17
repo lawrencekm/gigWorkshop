@@ -21,6 +21,8 @@ class CreateOrdersTable extends Migration
             $table->string('merchant_id');
             $table->string('status_id');
             $table->string('citation_id');
+            $table->integer('sources');
+            $table->integer('provide_sources');
             $table->string('educationlevel_id');
             $table->string('spacing');
             $table->string('preferred_writer'); //or bid
@@ -29,6 +31,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_status');
             $table->float('price'); //company pay
             $table->integer('pages');
+            $table->integer('slides');
             $table->float('cost'); //merchant pay
             $table->datetime('deadline');
             $table->timestamp('assigned_at');
