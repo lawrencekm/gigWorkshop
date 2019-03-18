@@ -10,4 +10,5 @@ class Conversation extends Model
     public function replies(){
         return $this->hasMany('wezaworkshop\Reply');
     }
+
 }

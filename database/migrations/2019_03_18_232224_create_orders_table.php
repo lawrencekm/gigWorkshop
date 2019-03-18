@@ -20,11 +20,11 @@ class CreateOrdersTable extends Migration
             $table->string('customer_id');
             $table->string('merchant_id');
             $table->integer('orderstatus_id')->unsigned();
-            $table->foreign('orderstatus_id')->referencing('id')->on('orderstatuses');
+            $table->foreign('orderstatus_id')->references('id')->on('orderstatuses');
             $table->integer('typeofwork_id')->unsigned();
-            $table->foreign('typeofwork_id')->referencing('id')->on('typeofworks');
-            $table->string('citation_id')->unsigned();
-            $table->foreign('citation_id')->referencing('id')->on('citations');
+            $table->foreign('typeofwork_id')->references('id')->on('typeofworks');
+            $table->integer('citation_id')->unsigned()->nullable();
+            $table->foreign('citation_id')->references('id')->on('citations');
             $table->integer('sources');
             $table->integer('provide_sources');
             $table->string('educationlevel_id');
@@ -33,19 +33,19 @@ class CreateOrdersTable extends Migration
             $table->string('support_note'); //by support team
             $table->string('short_description');//by customer
             $table->integer('transactionstatus_id')->unsigned();
-            $table->string('transactionstatus_id')->referencing('id')->on('transactionstatuses');
+            $table->foreign('transactionstatus_id')->references('id')->on('transactionstatuses');
             $table->float('price'); //company pay
             $table->integer('pages');
             $table->integer('slides');
             $table->float('cost'); //merchant pay
             $table->datetime('deadline');
-            $table->timestamp('assigned_at');
-            $table->timestamp('completed_at');
-            $table->boolean('customer_paid')->default(0); 
-            $table->boolean('merchant_paid')->default(0);
-            $table->boolean('preview')->default(0); //sample paper
+            $table->datetime('assigned_at');
+            $table->datetime('completed_at');
+            $table->boolean('customer_paid')->default(false); 
+            $table->boolean('merchant_paid')->default(false);
+            $table->boolean('preview')->default(false); //sample paper
             $table->string('preview_link');
-            $table->boolean('urgent')->default(0);
+            $table->boolean('urgent')->default(false);
             $table->integer('rating_by_customer');
             $table->integer('rating_by_merchant'); 
             

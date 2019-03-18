@@ -21,9 +21,9 @@ class CreateBidsTable extends Migration
             $table->text('bidreason');
             $table->text('note');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->referencing('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->referencing('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

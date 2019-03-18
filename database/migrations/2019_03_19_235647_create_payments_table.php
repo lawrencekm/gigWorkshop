@@ -18,19 +18,19 @@ class CreatePaymentsTable extends Migration
             $table->timestamps();
 
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->referencing('id')
+            $table->foreign('order_id')->references('id')
                             ->on('orders'); 
 
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->referencing('id')
+            $table->foreign('user_id')->references('id')
                             ->on('users'); 
 
             $table->integer('paymentmethod_id')->unsigned();
-            $table->foreign('paymentmethod_id')->referencing('id')
+            $table->foreign('paymentmethod_id')->references('id')
                             ->on('paymentmethods'); 
 
             $table->integer('paymentstatuses_id')->unsigned();
-            $table->foreign('paymentstatuses_id')->referencing('id')
+            $table->foreign('paymentstatuses_id')->references('id')
                             ->on('paymentstatuses');
 
                             

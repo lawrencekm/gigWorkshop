@@ -8,24 +8,24 @@ class Order extends Model
 {
     //
     public function disciplines(){
-        return $this->belongsToMany('wezaworkshop\Discipline');
+        return $this->belongsToMany(Discipline::class)->withTimestamps();
     }
     public function transactionstatus(){
-        return $this->belongsTo('wezaworkshop\Transactionstatus');
+        return $this->belongsTo('Wezaworkshop\Transactionstatus');
     }
     public function bids(){
-        return $this->hasMany('wezaworkshop\Bid');
+        return $this->hasMany('Wezaworkshop\Bid');
     }
     public function transactions(){
-        return $this->hasMany('wezaworkshop\Transaction');
+        return $this->hasMany('Wezaworkshop\Transaction');
     }
     public function orderstatus(){
-        return $this->belongsTo('wezaworkshop\Orderstatus');
+        return $this->belongsTo('Wezaworkshop\Orderstatus');
     }
     public function typeofwork(){
-        return $this->belongsTo('wezaworkshop\Typeofwork');
+        return $this->belongsTo('Wezaworkshop\Typeofwork');
     }
     public function citation(){
-        return $this->belongsTo('wezaworkshop\Citation');
+        return $this->belongsTo('Wezaworkshop\Citation');
     }
 }

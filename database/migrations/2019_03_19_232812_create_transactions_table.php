@@ -17,23 +17,23 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->referencing('id')
+            $table->foreign('order_id')->references('id')
                             ->on('orders'); 
 
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->referencing('id')
+            $table->foreign('user_id')->references('id')
                             ->on('users'); 
 
             $table->integer('transactionmethod_id')->unsigned();
-            $table->foreign('transactionmethod_id')->referencing('id')
+            $table->foreign('transactionmethod_id')->references('id')
                       ->on('transactionmethods'); 
 
             $table->integer('transactionstatus_id')->unsigned();
-            $table->foreign('transactionstatus_id')->referencing('id')
+            $table->foreign('transactionstatus_id')->references('id')
                             ->on('transactionstatuses');
 
             $table->integer('transactiontype_id')->unsigned();
-            $table->foreign('transactiontype_id')->referencing('id')
+            $table->foreign('transactiontype_id')->references('id')
                             ->on('transactiontypes');
                             
             $table->float('amount');

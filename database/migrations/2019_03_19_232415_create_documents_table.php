@@ -17,14 +17,14 @@ class CreateDocumentsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->referencing('id')
+            $table->foreign('order_id')->references('id')
                     ->on('orders')->onDelete('cascade');
 
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->referencing('id')
+            $table->foreign('user_id')->references('id')
                     ->on('users'); 
             $table->integer('documenttype_id')->unsigned();
-            $table->foreign('documenttype_id')->referencing('id')
+            $table->foreign('documenttype_id')->references('id')
                             ->on('documenttypes');
 
             $table->string('name');

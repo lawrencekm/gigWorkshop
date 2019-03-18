@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrganizationsTable extends Migration
+class CreateReferralsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateOrganizationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('referrals', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
-            $table->string('note');
-            $table->integer('address_id')->usigned();
-            $table->foreign('address_id')->referencing('id')->on('addresses');
-
+            $table->integer('user_id')->unsigned(); //referrer
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('referred_id')->unsigned(); //referrer
+            $table->foreign('referred_id')->references('id')->on('users');
+        
         });
     }
 
@@ -31,6 +31,6 @@ class CreateOrganizationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('referrals');
     }
 }

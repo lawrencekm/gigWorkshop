@@ -28,25 +28,28 @@ class User extends Authenticatable
     ];
     //1:1 with address
     public function address(){
-        return $this->morphMany('wezaworkshop\Address','addressable');
+        return $this->morphMany('Wezaworkshop\Address','addressable');
     }
     public function payments(){
-        return $this->hasMany('wezaworkshop\Payment');
+        return $this->hasMany('Wezaworkshop\Payment');
     }
     public function userstatus(){
-        return $this->belongsTo('wezaworkshop\Userstatus');
+        return $this->belongsTo('Wezaworkshop\Userstatus');
     }
     public function roles(){
-        return $this->belongsToMany('wezaworkshop\Role');
+        return $this->belongsToMany('Wezaworkshop\Role');
     }
     public function disciplines(){
-        return $this->belongsToMany('wezaworkshop\Discipline');
+        return $this->belongsToMany(Discipline::class)->withTimestamps();
     }
     public function bids(){
-        return $this->hasMany('wezaworkshop\Bid');
+        return $this->hasMany('Wezaworkshop\Bid');
     }
     public function workingstatus(){
-        return $this->belongsTo('wezaworkshop\Workingstatus');
+        return $this->belongsTo('Wezaworkshop\Workingstatus');
+    }
+    public function referrals(){
+        return $this->hasMany('Wezaworkshop\Referral');
     }
 
     

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SubjectUser extends Migration
+class DisciplineUser extends Migration
 {
     /**
      * Run the migrations.
@@ -17,10 +17,10 @@ class SubjectUser extends Migration
         Schema::create('discipline_user', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('discipline_id')->unsigned();
-            $table->foreign('discipline_id')->referencing('id')->on('disciplines');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->referencing('id')->on('users');
+            $table->integer('discipline_id')->unsigned()->nullable();
+            $table->foreign('discipline_id')->references('id')->on('disciplines');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
         });
         
     }

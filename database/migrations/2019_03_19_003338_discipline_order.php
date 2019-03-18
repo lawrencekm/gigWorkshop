@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrderSubject extends Migration
+class DisciplineOrder extends Migration
 {
     /**
      * Run the migrations.
@@ -17,10 +17,10 @@ class OrderSubject extends Migration
         Schema::create('discipline_order', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('discipline_id')->unsigned();
-            $table->foreign('discipline_id')->referencing('id')->on('disciplines');
-            $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->referencing('id')->on('orders');
+            $table->integer('discipline_id')->unsigned()->nullable();
+            $table->foreign('discipline_id')->references('id')->on('disciplines');
+            $table->integer('order_id')->unsigned()->nullable();
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

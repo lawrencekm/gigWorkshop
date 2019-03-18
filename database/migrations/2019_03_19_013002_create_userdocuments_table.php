@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRepliesTable extends Migration
+class CreateUserdocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('replies', function (Blueprint $table) {
+        Schema::create('userdocuments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('status');
-            $table->integer('conversation_id')->unsigned();
-            $table->foreign('conversation_id')->referencing('id')
-                     ->on('conversations');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->referencing('id')
+            $table->foreign('user_id')->references('id')
                     ->on('users'); 
-            $table->text('message');
+            $table->integer('userdocumenttype_id')->unsigned();
+            $table->foreign('userdocumenttype_id')->references('id')
+                            ->on('userdocumenttypes'); 
+            $table->string('name');
+            $table->string('description');
+            $table->string('note');
         });
     }
 
@@ -34,6 +35,6 @@ class CreateRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replies');
+        Schema::dropIfExists('userdocuments');
     }
 }
