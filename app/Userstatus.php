@@ -4,10 +4,10 @@ namespace Wezaworkshop;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Discipline extends Model
+class Userstatus extends Model
 {
     //
     public function users(){
-        return $this->belongsToMany('wezaworkshop\User');
+        return $this->hasMany('wezaworkshop\User');
     }
 }

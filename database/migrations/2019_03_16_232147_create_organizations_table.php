@@ -18,7 +18,8 @@ class CreateOrganizationsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('note');
-            $table->integer('address_id');
+            $table->integer('address_id')->usigned();
+            $table->foreign('address_id')->referencing('id')->on('addresses');
 
         });
     }

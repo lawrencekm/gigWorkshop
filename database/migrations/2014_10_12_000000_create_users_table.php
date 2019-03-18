@@ -18,22 +18,27 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->string('facebook_id')->unique();
+            $table->string('facebook_id')->unique(); //socialite
             $table->string('altemail');
             $table->string('password');
             $table->string('otp');
             $table->string('mobile')->unique();
             $table->date('dob');
             $table->string('timezone');
+            $table->integer('userstatus_id')->unsigned();
+            $table->foreign('userstatus_id')->referencing('id')->on('userstatus');
+            $table->integer('address_id')->usigned();
+            $table->foreign('address_id')->referencing('id')->on('addresses');
             $table->boolean('active')->default(0); //active or inactive
-            $table->boolean('promo_email_notifications')->default(1);
-            $table->boolean('order_email_notifications')->default(1);
-            $table->boolean('available_at_night')->default(1);
+            $table->boolean('promo_email_notifications')->default(true);
+            $table->boolean('order_email_notifications')->default(true);
+            $table->boolean('available_at_night')->default(true);
             $table->integer('working_status_id'); //working or not working or taking short orders etc...
-            $table->integer('role_id');
-            $table->integer('organization_id');//parent organization
-            $table->integer('National_ID');
-            $table->integer('education_level_id');
+            $table->integer('organization_id')->unsigned();//parent organization
+            $table->foreign('organization_id')->references('id')->on('organizations');//parent organization
+            $table->string('National_ID');
+            $table->integer('educationlevel_id')->unsigned();
+            $table->foreign('educationlevel_id')->referencing('id')->on('educationlevels');
             $table->text('note');
             $table->string('last_login_ip');
             $table->timestamp('last_login');

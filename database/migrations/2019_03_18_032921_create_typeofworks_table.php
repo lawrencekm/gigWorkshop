@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SubjectUser extends Migration
+class CreateTypeofworksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,13 @@ class SubjectUser extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('typeofworks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->string('name');
+            $table->string('description');
+            $table->string('note');
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class SubjectUser extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('typeofworks');
     }
 }

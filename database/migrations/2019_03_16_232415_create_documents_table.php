@@ -20,13 +20,14 @@ class CreateDocumentsTable extends Migration
             $table->foreign('order_id')->referencing('id')
                     ->on('orders')->onDelete('cascade');
 
-            $table->integer('owner_id')->unsigned();
-            $table->foreign('owner_id')->referencing('id')
-                    ->on('users');  //deletion unexpected
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->referencing('id')
+                    ->on('users'); 
             $table->integer('documenttype_id')->unsigned();
             $table->foreign('documenttype_id')->referencing('id')
-                            ->on('documenttypes');  //deletion unexpected
-        
+                            ->on('documenttypes');
+
+            $table->string('name');
             $table->string('description');
             $table->string('note');
         });

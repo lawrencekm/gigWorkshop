@@ -24,6 +24,9 @@ class CreateConversationsTable extends Migration
             $table->integer('user_2')->unsigned();
             $table->foreign('user_2')->referencing('id')
                             ->on('users'); 
+            $table->integer('order_id')->unsigned();
+            $table->foreign('order_id')->referencing('id')
+                            ->on('orders'); 
             $table->string('ip');
 
         });

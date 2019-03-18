@@ -25,17 +25,14 @@ class CreatePaymentsTable extends Migration
             $table->foreign('user_id')->referencing('id')
                             ->on('users'); 
 
-            $table->integer('paymentmethod_id');
+            $table->integer('paymentmethod_id')->unsigned();
             $table->foreign('paymentmethod_id')->referencing('id')
                             ->on('paymentmethods'); 
 
-            $table->integer('transactionstatus_id');
-            $table->foreign('transactionstatus_id')->referencing('id')
-                            ->on('transactionstatuses');
+            $table->integer('paymentstatuses_id')->unsigned();
+            $table->foreign('paymentstatuses_id')->referencing('id')
+                            ->on('paymentstatuses');
 
-            $table->integer('transactiontype_id');
-            $table->foreign('transactiontype_id')->referencing('id')
-                            ->on('transactiontypes');
                             
             $table->float('amount');
             $table->string('note');

@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Userdocument extends Model
 {
     //
+    public function user(){
+        return $this->belongsTo('wezaworkshop\User');
+    }
+    public function userdocumenttype(){
+        return $this->belongsTo('wezaworkshop\Userdocumenttype');
+    }
 }

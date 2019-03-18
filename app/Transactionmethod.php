@@ -4,7 +4,7 @@ namespace Wezaworkshop;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transactiontype extends Model
+class Transactionmethod extends Model
 {
     //
     public function transactions(){

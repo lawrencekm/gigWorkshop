@@ -17,7 +17,7 @@ class CreateRepliesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('status');
-            $table->string('conversation_id');
+            $table->integer('conversation_id')->unsigned();
             $table->foreign('conversation_id')->referencing('id')
                      ->on('conversations');
             $table->integer('user_id')->unsigned();

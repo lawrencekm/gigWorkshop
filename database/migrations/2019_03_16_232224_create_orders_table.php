@@ -19,8 +19,12 @@ class CreateOrdersTable extends Migration
             $table->string('topic');
             $table->string('customer_id');
             $table->string('merchant_id');
-            $table->string('status_id');
-            $table->string('citation_id');
+            $table->integer('orderstatus_id')->unsigned();
+            $table->foreign('orderstatus_id')->referencing('id')->on('orderstatuses');
+            $table->integer('typeofwork_id')->unsigned();
+            $table->foreign('typeofwork_id')->referencing('id')->on('typeofworks');
+            $table->string('citation_id')->unsigned();
+            $table->foreign('citation_id')->referencing('id')->on('citations');
             $table->integer('sources');
             $table->integer('provide_sources');
             $table->string('educationlevel_id');
@@ -28,7 +32,8 @@ class CreateOrdersTable extends Migration
             $table->string('preferred_writer'); //or bid
             $table->string('support_note'); //by support team
             $table->string('short_description');//by customer
-            $table->string('payment_status');
+            $table->integer('transactionstatus_id')->unsigned();
+            $table->string('transactionstatus_id')->referencing('id')->on('transactionstatuses');
             $table->float('price'); //company pay
             $table->integer('pages');
             $table->integer('slides');

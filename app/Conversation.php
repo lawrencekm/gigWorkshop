@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Conversation extends Model
 {
     //
+    public function replies(){
+        return $this->hasMany('wezaworkshop\Reply');
+    }
 }

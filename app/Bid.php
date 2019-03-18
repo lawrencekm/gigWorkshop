@@ -4,13 +4,13 @@ namespace Wezaworkshop;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Bid extends Model
 {
     //
+    public function user(){
+        return $this->belongsTo('wezaworkshop\User');
+    }
     public function order(){
         return $this->belongsTo('wezaworkshop\Order');
-    }
-    public function documenttype(){
-        return $this->belongsTo('wezaworkshop\Documenttype');
     }
 }

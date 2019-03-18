@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Documenttype extends Model
 {
     //
+    public function payments(){
+        return $this->hasMany('wezaworkshop\Payment');
+    }
 }

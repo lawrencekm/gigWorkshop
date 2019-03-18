@@ -24,15 +24,15 @@ class CreateTransactionsTable extends Migration
             $table->foreign('user_id')->referencing('id')
                             ->on('users'); 
 
-            $table->integer('paymentmethod_id');
-            $table->foreign('paymentmethod_id')->referencing('id')
-                            ->on('paymentmethods'); 
+            $table->integer('transactionmethod_id')->unsigned();
+            $table->foreign('transactionmethod_id')->referencing('id')
+                      ->on('transactionmethods'); 
 
-            $table->integer('transactionstatus_id');
+            $table->integer('transactionstatus_id')->unsigned();
             $table->foreign('transactionstatus_id')->referencing('id')
                             ->on('transactionstatuses');
 
-            $table->integer('transactiontype_id');
+            $table->integer('transactiontype_id')->unsigned();
             $table->foreign('transactiontype_id')->referencing('id')
                             ->on('transactiontypes');
                             
