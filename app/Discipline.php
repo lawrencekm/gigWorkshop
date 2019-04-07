@@ -8,9 +8,9 @@ class Discipline extends Model
 {
     //
     public function users(){
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany('Wezaworkshop\User')->withTimestamps();
     }
     public function orders(){
-        return $this->belongsToMany(Order::class)->withTimestamps();
+        return $this->belongsToMany('Wezaworkshop\Order')->withTimestamps();
     }
 }

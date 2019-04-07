@@ -8,7 +8,7 @@ class Reply extends Model
 {
     //
     public function conversation(){
-        return $this->belongsTo('wezaworkshop\Conversation');
+        return $this->belongsTo('Wezaworkshop\Conversation');
     }
 
 }

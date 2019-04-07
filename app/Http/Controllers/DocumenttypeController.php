@@ -14,6 +14,8 @@ class DocumenttypeController extends Controller
      */
     public function index()
     {
+        $documenttypes = Documenttype::all();
+        return view('admin.documenttypes.index', compact('documenttypes'));
         //
     }
 
@@ -25,6 +27,7 @@ class DocumenttypeController extends Controller
     public function create()
     {
         //
+        return view('admin.documenttypes.create');
     }
 
     /**
@@ -36,50 +39,92 @@ class DocumenttypeController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=> 'required',
+            'note'=> 'required'
+
+        ]);
+
+        $documenttype = new Documenttype;
+        $documenttype->name = $request->name;
+        $documenttype->description = $request->description;
+        $documenttype->note = $request->note;
+        $documenttype->save();
+
+        return redirect('admin/documenttypes');
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Wezaworkshop\Documenttype  $documenttype
+     * @param  \Wezaworkshop\Orderstatus  $educationlevel
      * @return \Illuminate\Http\Response
      */
     public function show(Documenttype $documenttype)
     {
         //
+        //$education = Educationlevel::find($id);
+        return view('admin.documenttypes.show',compact('documenttype'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Wezaworkshop\Documenttype  $documenttype
+     * @param  \Wezaworkshop\Documenttype
      * @return \Illuminate\Http\Response
      */
     public function edit(Documenttype $documenttype)
     {
         //
+        return view('admin.documenttypes.edit',compact('documenttype'));
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Wezaworkshop\Documenttype  $documenttype
+     * @param  \Wezaworkshop\Documenttype  $educationlevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Documenttype $documenttype)
+    public function update(Request $request, $id)
+
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'note'=>'required',
+
+        ]);
+
+        $documenttype = Documenttype::findOrFail($id);
+        $documenttype->name = $request->name;
+        $documenttype->description =$request->description;
+        $documenttype->note =$request->note;
+        $documenttype->save();
+        
+        
+        $request->session()->flash('message', 'Successfully modified the document type!');
+
+        return redirect('admin/documenttypes/'.$documenttype->id);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Wezaworkshop\Documenttype  $documenttype
+     * @param  \Wezaworkshop\Documenttype 
      * @return \Illuminate\Http\Response
      */
     public function destroy(Documenttype $documenttype)
     {
         //
+        $documenttype->delete();
+        return redirect('admin/documenttypes');
     }
 }

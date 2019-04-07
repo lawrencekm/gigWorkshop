@@ -8,9 +8,9 @@ class Userdocument extends Model
 {
     //
     public function user(){
-        return $this->belongsTo('wezaworkshop\User');
+        return $this->belongsTo('Wezaworkshop\User');
     }
     public function userdocumenttype(){
-        return $this->belongsTo('wezaworkshop\Userdocumenttype');
+        return $this->belongsTo('Wezaworkshop\Userdocumenttype');
     }
 }

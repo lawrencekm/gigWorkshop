@@ -8,6 +8,6 @@ class Paymentstatus extends Model
 {
     //
     public function payments(){
-        return $this->hasMany('wezaworkshop\Payment');
+        return $this->hasMany('Wezaworkshop\Payment');
     }
 }

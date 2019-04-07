@@ -8,6 +8,6 @@ class Userstatus extends Model
 {
     //
     public function users(){
-        return $this->hasMany('wezaworkshop\User');
+        return $this->hasMany('Wezaworkshop\User');
     }
 }

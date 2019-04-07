@@ -8,6 +8,6 @@ class Typeofwork extends Model
 {
     //
     public function orders(){
-        return $this->hasMany('wezaworkshop\Order');
+        return $this->hasMany('Wezaworkshop\Order');
     }
 }

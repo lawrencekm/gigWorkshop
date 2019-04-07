@@ -8,7 +8,7 @@ class Order extends Model
 {
     //
     public function disciplines(){
-        return $this->belongsToMany(Discipline::class)->withTimestamps();
+        return $this->belongsToMany('Wezaworkshop\Discipline')->withTimestamps();
     }
     public function transactionstatus(){
         return $this->belongsTo('Wezaworkshop\Transactionstatus');

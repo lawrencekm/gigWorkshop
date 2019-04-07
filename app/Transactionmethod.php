@@ -8,6 +8,6 @@ class Transactionmethod extends Model
 {
     //
     public function transactions(){
-        return $this->hasMany('wezaworkshop\Transaction');
+        return $this->hasMany('Wezaworkshop\Transaction');
     }
 }

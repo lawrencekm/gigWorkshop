@@ -14,6 +14,8 @@ class EducationlevelController extends Controller
      */
     public function index()
     {
+        $educationlevels = Educationlevel::all();
+        return view('admin.educationlevels.index', compact('educationlevels'));
         //
     }
 
@@ -25,6 +27,7 @@ class EducationlevelController extends Controller
     public function create()
     {
         //
+        return view('admin.educationlevels.create');
     }
 
     /**
@@ -36,6 +39,22 @@ class EducationlevelController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=> 'required',
+            'note'=> 'required'
+
+        ]);
+
+        $educationlevel = new Educationlevel;
+        $educationlevel->name = $request->name;
+        $educationlevel->description = $request->description;
+        $educationlevel->note = $request->note;
+        $educationlevel->save();
+
+        return redirect('admin/educationlevels');
+
+
     }
 
     /**
@@ -47,6 +66,10 @@ class EducationlevelController extends Controller
     public function show(Educationlevel $educationlevel)
     {
         //
+        //$education = Educationlevel::find($id);
+        //echo $educationlevel->name;
+        //dd($educationlevel);
+        return view('admin.educationlevels.show',compact('educationlevel'));
     }
 
     /**
@@ -58,6 +81,10 @@ class EducationlevelController extends Controller
     public function edit(Educationlevel $educationlevel)
     {
         //
+       // $educationlevel = Educationlevel::find($id);
+        return view('admin.educationlevels.edit',compact('educationlevel'));
+
+
     }
 
     /**
@@ -67,9 +94,34 @@ class EducationlevelController extends Controller
      * @param  \Wezaworkshop\Educationlevel  $educationlevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Educationlevel $educationlevel)
+    //public function update(Request $request, Educationlevel $educationlevel)
+    public function update(Request $request, $id)
+
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'note'=>'required',
+
+        ]);
+
+        $educationlevel = Educationlevel::findOrFail($id);
+        /*
+        $educationlevel->fill($request->all());
+        $educationlevel->save();
+        */
+
+        $educationlevel->name = $request->name;
+        $educationlevel->description =$request->description;
+        $educationlevel->note =$request->note;
+        $educationlevel->save();
+        
+        
+        $request->session()->flash('message', 'Successfully modified the level!');
+
+        return redirect('admin/educationlevels/'.$educationlevel->id);
+
     }
 
     /**
@@ -81,5 +133,7 @@ class EducationlevelController extends Controller
     public function destroy(Educationlevel $educationlevel)
     {
         //
+        $educationlevel->delete();
+        return redirect('admin/educationlevels');
     }
 }

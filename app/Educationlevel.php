@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Educationlevel extends Model
 {
+
+
     //
     public function users(){
-        return $this->hasMany('wezaworkshop\Users');
+        return $this->hasMany('Wezaworkshop\Users');
     }
 }

@@ -8,9 +8,9 @@ class Bid extends Model
 {
     //
     public function user(){
-        return $this->belongsTo('wezaworkshop\User');
+        return $this->belongsTo('Wezaworkshop\User');
     }
     public function order(){
-        return $this->belongsTo('wezaworkshop\Order');
+        return $this->belongsTo('Wezaworkshop\Order');
     }
 }

@@ -39,18 +39,14 @@
         </form>
 
 
-      <h2>TITLE HEADING</h2>
+      <h2>HI Merchant</h2>
       <h5>Title description, Dec 7, 2017</h5>
       <p>Some text..</p>
       <p>Beautiful Africa!.</p>
       <br>
 
-
-
       <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+    
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
@@ -60,11 +56,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+
+                    You are logged        {{ Auth::user()->email }} 
+
                 </div>
-            </div>
-        </div>
-    </div>
+            
 </div>
 
 </div>

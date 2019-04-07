@@ -8,9 +8,9 @@ class Transactionstatus extends Model
 {
     //
     public function orders(){
-        return $this->hasMany('wezaworkshop\Order');
+        return $this->hasMany('Wezaworkshop\Order');
     }
     public function transactions(){
-        return $this->hasMany('wezaworkshop\Transaction');
+        return $this->hasMany('Wezaworkshop\Transaction');
     }
 }

@@ -19,13 +19,13 @@ class CreateConversationsTable extends Migration
             $table->string('topic');
             $table->string('status');
             $table->integer('user_1')->unsigned()->nullable();
-            //$table->foreign('user_1')->references('id')->on('users'); 
-            $table->integer('user_2')->unsigned()->nullable();
+            $table->foreign('user_1')->references('id')->on('users');
+            $table->string('user_2');
             //$table->foreign('user_2')->references('id') ->on('users'); 
             $table->integer('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')
                             ->on('orders'); 
-            $table->string('ip');
+            $table->text('message');
 
         });
     }

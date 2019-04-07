@@ -8,6 +8,6 @@ class Userdocumenttype extends Model
 {
     //
     public function userdocuments(){
-        return $this->hasMany('wezaworkshop\Userdocument');
+        return $this->hasMany('Wezaworkshop\Userdocument');
     }
 }

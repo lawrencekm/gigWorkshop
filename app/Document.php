@@ -8,9 +8,9 @@ class Document extends Model
 {
     //
     public function order(){
-        return $this->belongsTo('wezaworkshop\Order');
+        return $this->belongsTo('Wezaworkshop\Order');
     }
     public function documenttype(){
-        return $this->belongsTo('wezaworkshop\Documenttype');
+        return $this->belongsTo('Wezaworkshop\Documenttype');
     }
 }

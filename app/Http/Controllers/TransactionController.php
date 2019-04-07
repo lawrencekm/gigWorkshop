@@ -14,6 +14,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $roles = Role::all();
+        return view('admin.roles.index', compact('roles'));
         //
     }
 
@@ -25,6 +27,7 @@ class TransactionController extends Controller
     public function create()
     {
         //
+        return view('admin.roles.create');
     }
 
     /**
@@ -36,50 +39,90 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=> 'required',
+            'note'=> 'required'
+
+        ]);
+
+        $role = new Role;
+        $role->name = $request->name;
+        $role->description = $request->description;
+        $role->note = $request->note;
+        $role->save();
+
+        return redirect('admin/roles');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Wezaworkshop\Transaction  $transaction
+     * @param  \Wezaworkshop\Orderstatus  $educationlevel
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(Role $role)
     {
         //
+        return view('admin.roles.show',compact('role'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Wezaworkshop\Transaction  $transaction
+     * @param  \Wezaworkshop\Documenttype
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit(Role $role)
     {
         //
+        return view('admin.roles.edit',compact('role'));
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Wezaworkshop\Transaction  $transaction
+     * @param  \Wezaworkshop\Documenttype  $educationlevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
+
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'note'=>'required',
+
+        ]);
+
+        $role = Role::findOrFail($id);
+        $role->name = $request->name;
+        $role->description =$request->description;
+        $role->note =$request->note;
+        $role->save();
+        
+        
+        $request->session()->flash('message', 'Successfully modified the role!');
+
+        return redirect('admin/roles/'.$role->id);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Wezaworkshop\Transaction  $transaction
+     * @param  \Wezaworkshop\Documenttype 
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Role $role)
     {
         //
+        $role->delete();
+        return redirect('admin/roles');
     }
 }

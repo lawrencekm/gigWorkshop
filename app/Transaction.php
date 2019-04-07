@@ -8,18 +8,18 @@ class Transaction extends Model
 {
     //
     public function transactiontatus(){
-        return $this->belongsTo('wezaworkshop\Transactionstatus');
+        return $this->belongsTo('Wezaworkshop\Transactionstatus');
     }
     public function transactionmethod(){
-        return $this->belongsTo('wezaworkshop\Transactionmethod');
+        return $this->belongsTo('Wezaworkshop\Transactionmethod');
     }
     public function transactiontype(){
-        return $this->belongsTo('wezaworkshop\Transactionmethod');
+        return $this->belongsTo('Wezaworkshop\Transactionmethod');
     }
     public function user(){
-        return $this->belongsTo('wezaworkshop\User');
+        return $this->belongsTo('Wezaworkshop\User');
     }
     public function order(){
-        return $this->belongsTo('wezaworkshop\Order');
+        return $this->belongsTo('Wezaworkshop\Order');
     }
 }

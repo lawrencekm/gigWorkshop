@@ -14,6 +14,8 @@ class UserstatusController extends Controller
      */
     public function index()
     {
+        $userstatuses = Userstatus::all();
+        return view('admin.userstatuses.index', compact('userstatuses'));
         //
     }
 
@@ -25,6 +27,7 @@ class UserstatusController extends Controller
     public function create()
     {
         //
+        return view('admin.userstatuses.create');
     }
 
     /**
@@ -36,50 +39,90 @@ class UserstatusController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=> 'required',
+            'note'=> 'required'
+
+        ]);
+
+        $userstatus = new Userstatus;
+        $userstatus->name = $request->name;
+        $userstatus->description = $request->description;
+        $userstatus->note = $request->note;
+        $userstatus->save();
+
+        return redirect('admin/userstatuses');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Wezaworkshop\Userstatus  $userstatus
+     * @param  \Wezaworkshop\Orderstatus  $educationlevel
      * @return \Illuminate\Http\Response
      */
     public function show(Userstatus $userstatus)
     {
         //
+        return view('admin.userstatuses.show',compact('userstatus'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Wezaworkshop\Userstatus  $userstatus
+     * @param  \Wezaworkshop\Documenttype
      * @return \Illuminate\Http\Response
      */
     public function edit(Userstatus $userstatus)
     {
         //
+        return view('admin.userstatuses.edit',compact('userstatus'));
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Wezaworkshop\Userstatus  $userstatus
+     * @param  \Wezaworkshop\Documenttype  $educationlevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Userstatus $userstatus)
+    public function update(Request $request, $id)
+
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'note'=>'required',
+
+        ]);
+
+        $userstatus = Userstatus::findOrFail($id);
+        $userstatus->name = $request->name;
+        $userstatus->description =$request->description;
+        $userstatus->note =$request->note;
+        $userstatus->save();
+        
+        
+        $request->session()->flash('message', 'Successfully modified the user status!');
+
+        return redirect('admin/userstatuses/'.$userstatus->id);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Wezaworkshop\Userstatus  $userstatus
+     * @param  \Wezaworkshop\Documenttype 
      * @return \Illuminate\Http\Response
      */
     public function destroy(Userstatus $userstatus)
     {
         //
+        $userstatus->delete();
+        return redirect('admin/userstatuses');
     }
 }

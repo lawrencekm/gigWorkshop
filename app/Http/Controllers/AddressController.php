@@ -15,6 +15,8 @@ class AddressController extends Controller
     public function index()
     {
         //
+        $addresses = Address::all();
+        return view('admin.addresses.index', compact('addresses'));
     }
 
     /**
@@ -25,6 +27,7 @@ class AddressController extends Controller
     public function create()
     {
         //
+        return view('admin.addresses.create');
     }
 
     /**
@@ -36,6 +39,33 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'country'=>'required',
+            'country_code'=>'required',
+            'tel'=>'required',
+            'city'=>'required',
+            'state_province'=>'required',
+            'zipcode'=>'required',
+            'note'=>'required',
+        ]);
+
+        $address = new Address;
+        $address->country = $request->country;
+        $address->country_code = $request->country_code;
+        $address->tel = $request->tel;
+        $address->city = $request->city;
+        $address->state_province = $request->state_province;
+        $address->zipcode = $request->zipcode;
+        $address->note = $request->note;
+        $address->save();
+
+        $request->session()->flash('message', 'Successfully created the Address!');
+
+
+        return redirect('admin/addresses');
+
+
+
     }
 
     /**
@@ -46,7 +76,7 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        //
+        return view('admin.addresses.show', compact('address'));
     }
 
     /**
@@ -58,6 +88,7 @@ class AddressController extends Controller
     public function edit(Address $address)
     {
         //
+        return view('admin.addresses.edit',compact('address'));
     }
 
     /**
@@ -67,9 +98,33 @@ class AddressController extends Controller
      * @param  \Wezaworkshop\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'country'=>'required',
+            'country_code'=>'required',
+            'tel'=>'required',
+            'city'=>'required',
+            'state_province'=>'required',
+            'zipcode'=>'required',
+            'note'=>'required',
+        ]);
+
+        $address = Address::findOrFail($id);
+        $address->country = $request->country;
+        $address->country_code = $request->country_code;
+        $address->tel = $request->tel;
+        $address->city = $request->city;
+        $address->state_province = $request->state_province;
+        $address->zipcode = $request->zipcode;
+        $address->note = $request->note;
+        $address->save();
+
+        $request->session()->flash('message', 'Successfully updated the Address!');
+
+
+        return redirect('admin/addresses/'.$address->id);
     }
 
     /**
@@ -78,8 +133,13 @@ class AddressController extends Controller
      * @param  \Wezaworkshop\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $address)
+    public function destroy(Address $address,Request $request)
     {
         //
+        $address->delete();
+        $request->session()->flash('message', 'Successfully deleted the Address!');
+        return redirect('admin/addresses');
+
+
     }
 }

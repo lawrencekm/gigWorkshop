@@ -14,6 +14,8 @@ class TransactionstatusController extends Controller
      */
     public function index()
     {
+        $transactionstatuses = Transactionstatus::all();
+        return view('admin.transactionstatuses.index', compact('transactionstatuses'));
         //
     }
 
@@ -25,6 +27,7 @@ class TransactionstatusController extends Controller
     public function create()
     {
         //
+        return view('admin.transactionstatuses.create');
     }
 
     /**
@@ -36,50 +39,90 @@ class TransactionstatusController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=> 'required',
+            'note'=> 'required'
+
+        ]);
+
+        $transactionstatus = new Transactionstatus;
+        $transactionstatus->name = $request->name;
+        $transactionstatus->description = $request->description;
+        $transactionstatus->note = $request->note;
+        $transactionstatus->save();
+
+        return redirect('admin/transactionstatuses');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Wezaworkshop\Transactionstatus  $transactionstatus
+     * @param  \Wezaworkshop\Orderstatus  $educationlevel
      * @return \Illuminate\Http\Response
      */
     public function show(Transactionstatus $transactionstatus)
     {
         //
+        return view('admin.transactionstatuses.show',compact('transactionstatus'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Wezaworkshop\Transactionstatus  $transactionstatus
+     * @param  \Wezaworkshop\Documenttype
      * @return \Illuminate\Http\Response
      */
     public function edit(Transactionstatus $transactionstatus)
     {
         //
+        return view('admin.transactionstatuses.edit',compact('transactionstatus'));
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Wezaworkshop\Transactionstatus  $transactionstatus
+     * @param  \Wezaworkshop\Documenttype  $educationlevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transactionstatus $transactionstatus)
+    public function update(Request $request, $id)
+
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'note'=>'required',
+
+        ]);
+
+        $transactionstatus = Transactionstatus::findOrFail($id);
+        $transactionstatus->name = $request->name;
+        $transactionstatus->description =$request->description;
+        $transactionstatus->note =$request->note;
+        $transactionstatus->save();
+        
+        
+        $request->session()->flash('message', 'Successfully modified the payment status!');
+
+        return redirect('admin/transactionstatuses/'.$transactionstatus->id);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Wezaworkshop\Transactionstatus  $transactionstatus
+     * @param  \Wezaworkshop\Documenttype 
      * @return \Illuminate\Http\Response
      */
     public function destroy(Transactionstatus $transactionstatus)
     {
         //
+        $transactionstatus->delete();
+        return redirect('admin/transactionstatuses');
     }
 }

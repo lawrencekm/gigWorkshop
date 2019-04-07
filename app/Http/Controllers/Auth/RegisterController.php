@@ -1,6 +1,7 @@
 <?php
 
 namespace Wezaworkshop\Http\Controllers\Auth;
+//use Wezaworkshop\Role;
 
 use Wezaworkshop\User;
 use Wezaworkshop\Http\Controllers\Controller;
@@ -27,7 +28,31 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+    protected function redirectTo(){
+
+        $roles = Auth::user()->roles;
+        //role 1 is admin, 2 is manager etc
+        if($roles->contains(1)){
+            return  '/admin/dashboard';
+
+        }elseif($roles->contains(2)) {
+            return '/manager/dashboard';
+
+        }elseif($roles->contains(3)){
+            return '/officer/dashboard';
+
+        }elseif($roles->contains(4)){
+            return '/customer/dashboard';
+
+        }elseif($roles->contains(5)){
+            return '/merchant/dashboard';
+
+        }else{
+            return '/public/dashboard';
+        }
+
+    }
 
     /**
      * Create a new controller instance.
@@ -48,7 +73,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -63,7 +89,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
