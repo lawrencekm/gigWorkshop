@@ -40,12 +40,14 @@ class ConversationController extends Controller
     public function store(Request $request)
     {
         //
+        /*
         $request->validate([
             'name'=>'required',
             'description'=> 'required',
             'note'=> 'required'
 
         ]);
+        */
 
         $conversation = new Conversation;
         $conversation->topic = $request->topic;
@@ -55,6 +57,8 @@ class ConversationController extends Controller
         $conversation->order_id = $request->order_id;
         $conversation->message = $request->message;
         $conversation->save();
+
+        $request->session()->flush('message','Message sent successfully');
 
         return redirect('admin/conversations');
 
@@ -70,7 +74,7 @@ class ConversationController extends Controller
     {
         //
         //$education = Educationlevel::find($id);
-        return view('admin.documenttypes.show',compact('conversation'));
+        return view('admin.conversations.show',compact('conversation'));
     }
 
     /**
@@ -99,23 +103,27 @@ class ConversationController extends Controller
 
     {
         //
+        /*
         $request->validate([
             'name'=>'required',
             'description'=>'required',
             'note'=>'required',
 
         ]);
+        */
 
         $conversation = Conversation::findOrFail($id);
-        $conversation->name = $request->name;
-        $conversation->description =$request->description;
-        $conversation->note =$request->note;
-        $conversation->save();
+        $conversation->topic = $request->topic;
+        $conversation->status = $request->status;
+        $conversation->user_1 = $request->user_1;
+        $conversation->user_2 = $request->user_2;
+        $conversation->order_id = $request->order_id;
+        $conversation->message = $request->message;
+        $conversation->save();        
         
-        
-        $request->session()->flash('message', 'Successfully modified the payment method!');
+        $request->session()->flash('message', 'Successfully modified the message!');
 
-        return redirect('admin/conversations/'.$documenttype->id);
+        return redirect('admin/conversations/'.$conversation->id);
 
     }
 

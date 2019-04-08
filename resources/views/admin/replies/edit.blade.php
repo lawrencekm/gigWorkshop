@@ -22,7 +22,7 @@ return confirm('Are you sure?');
 
            {!! Form::open(array('method'=>'PUT',
                                 'action' => array(
-                                                'ConversationController@update', $conversation->id))) !!}
+                                                'ReplyController@update', $reply->id))) !!}
   
             <div class="form-group">
                 {!! Form::label('topic','Message Title',['class'=>'control-label']) !!}

@@ -47,9 +47,8 @@ class CreateOrdersTable extends Migration
             $table->string('preview_link');
             $table->boolean('urgent')->default(false);
             $table->integer('rating_by_customer');
-            $table->integer('rating_by_merchant'); 
+            $table->integer('rating_by_merchant');
             
-
         });
     }
 

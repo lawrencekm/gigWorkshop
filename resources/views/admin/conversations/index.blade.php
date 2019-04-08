@@ -25,9 +25,9 @@ Messages<a style="float:right;" href="conversations/create"><button class="btn b
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">Note</th>
+              <th scope="col">Topic</th>
+              <th scope="col">Message</th>
+              <th scope="col">Replies</th>
               <th scope="col">Created</th>
               <th scope="col">Modified</th>
               <th scope="col">Action</th>
@@ -37,14 +37,17 @@ Messages<a style="float:right;" href="conversations/create"><button class="btn b
             @foreach($conversations as $conversation)
             <tr>
               <th scope="row">{{$conversation->id}}</th>
-              <td><a href="conversations/{{$conversation->id}}">{{$conversation->name}}</a></td>
-              <td>{{$conversation->description}}</td>
-              <td>{{$conversation->note}}</td>
+              <td><a href="conversations/{{$conversation->id}}">{{$conversation->topic}}</a></td>
+              <td>{{$conversation->message}}</td>
+              <td>{{$conversation->replies()->count() }}</td>
               <td>{{$conversation->created_at->toFormattedDateString()}}</td>
               <td>{{$conversation->updated_at->toFormattedDateString()}}</td>
 
               <td>
               <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="{{ URL::to('admin/replies/?conversation_id=' . $conversation->id.'&conversation_topic='.$conversation->topic ) }}">
+                        <button type="button" class="btn btn-success btn-sm">Reply</button>
+                  </a>&nbsp;
                   <a href="{{ URL::to('admin/conversations/' . $conversation->id . '/edit') }}">
                         <button type="button" onclick="ConfirmDelete()" class="btn btn-warning btn-sm">Edit</button>
                   </a>&nbsp;

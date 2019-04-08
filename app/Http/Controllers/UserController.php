@@ -133,18 +133,74 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         //
         //Validate
+
+
+        /*
         $request->validate([
-            'firstname' => 'required|min:3',
+            'firstname' => 'required',
             'lastname' => 'required',
+            'email' => 'required|email',
+            'facebook_id' => 'required',
+            'altemail' => 'required',
+            'password' => 'required',
+            'otp' => 'required',
+            'mobile' => 'required',
+            'dob' => 'required',
+            'referral_code' => 'required',
+            'timezone' => 'required',
+            'address_id' => 'required',
+            'userstatus_id' => 'required',
+            'active' => 'required',
+            'promo_email_notifications' => 'required',
+            'order_email_notifications' => 'required',
+            'available_at_night' => 'required',
+            'working_status_id' => 'required',
+            'organization_id' => 'required',
+            'National_ID' => 'required',
+            'educationlevel_id' => 'required',
+            'note' => 'required',
+            'last_login_ip' => 'required',
+            'last_login' => 'required',
+           
         ]);
-        $user = User::find($id);
-        $user->firstname = $request->firstname;
-        $user->lastname = $request->lastname;
-        $user->save();
-        $request->session()->flash('message', 'Successfully modified the user!');
-        return redirect('users');
+        */
+ 
+
+        $user = User::findOrFail($id);
+
+
+            $user->firstname = $request->firstname;
+            $user->lastname = $request->lastname;
+            $user->email = $request->email;
+            $user->facebook_id = $request->facebook_id;
+            $user->altemail = $request->altemail;
+            /*
+            $user->password = $request->password;
+            */
+            $user->otp = $request->otp;
+            $user->mobile = $request->mobile;
+            $user->dob = $request->dob;
+            $user->referral_code = $request->referral_code;
+            $user->timezone = $request->timezone;
+            $user->address_id = $request->address_id;
+            $user->userstatus_id = $request->userstatus_id;
+            $user->active = $request->active;
+            $user->promo_email_notifications = $request->promo_email_notifications;
+            $user->order_email_notifications = $request->order_email_notifications;
+            $user->available_at_night = $request->available_at_night;
+            $user->working_status_id = $request->working_status_id;
+            $user->organization_id = $request->organization_id;
+            $user->National_ID = $request->National_ID;
+            $user->educationlevel_id = $request->educationlevel_id;
+            $user->note = $request->note;
+            $user->last_login_ip = $request->last_login_ip;
+            $user->last_login = $request->last_login;
+            $user->save();
+        //$request->session()->flash('message', 'Successfully modified the user!');
+        return redirect('admin/users');
     }
 
     /**

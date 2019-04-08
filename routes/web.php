@@ -22,6 +22,35 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+{
+    Route::resource('educationlevels','EducationlevelController');
+    Route::resource('disciplines','DisciplineController');
+    Route::resource('orderstatuses','OrderstatusController');
+    Route::resource('userdocumenttypes','UserdocumenttypeController');
+    Route::resource('citations','CitationController');
+    Route::resource('documenttypes','DocumenttypeController');
+    Route::resource('addresses','AddressController');
+    Route::resource('payments','PaymentController');
+    Route::resource('paymentmethods','PaymentmethodController');
+    Route::resource('paymentstatuses','PaymentstatusController');
+    Route::resource('roles','RoleController');
+    Route::resource('transactions','TransactionController');
+    Route::resource('transactionmethods','TransactionmethodController');
+    Route::resource('transactionstatuses','TransactionstatusController');
+    Route::resource('transactiontypes','TransactiontypeController');
+    Route::resource('typeofworks','TypeofworkController');
+    Route::resource('workingstatuses','WorkingstatusController');
+    Route::resource('userstatuses','UserstatusController');
+    Route::resource('conversations','ConversationController');
+    Route::resource('replies','ReplyController');
+    Route::resource('documents','DocumentController');
+    Route::resource('users','UserController');
+    Route::resource('orders','OrderController');
+});
+/*
+
 Route::resource('admin/educationlevels','EducationlevelController');
 Route::resource('admin/disciplines','DisciplineController');
 Route::resource('admin/orderstatuses','OrderstatusController');
@@ -29,18 +58,24 @@ Route::resource('admin/userdocumenttypes','UserdocumenttypeController');
 Route::resource('admin/citations','CitationController');
 Route::resource('admin/documenttypes','DocumenttypeController');
 Route::resource('admin/addresses','AddressController');
+Route::resource('admin/payments','PaymentController');
 Route::resource('admin/paymentmethods','PaymentmethodController');
 Route::resource('admin/paymentstatuses','PaymentstatusController');
 Route::resource('admin/roles','RoleController');
+Route::resource('admin/transactions','TransactionController');
 Route::resource('admin/transactionmethods','TransactionmethodController');
-
 Route::resource('admin/transactionstatuses','TransactionstatusController');
 Route::resource('admin/transactiontypes','TransactiontypeController');
 Route::resource('admin/typeofworks','TypeofworkController');
 Route::resource('admin/workingstatuses','WorkingstatusController');
 Route::resource('admin/userstatuses','UserstatusController');
 Route::resource('admin/conversations','ConversationController');
+Route::resource('admin/replies','ReplyController');
+Route::resource('admin/documents','DocumentController');
+Route::resource('admin/users','UserController');
+Route::resource('admin/orders','OrderController');
 
+*/
 
 
 //Route::match(['post','put'],'/admin/educationlevels','EducationlevelController@update');

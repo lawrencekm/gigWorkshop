@@ -11,8 +11,8 @@ return confirm('Are you sure?');
 
 <div class="card uper" style="margin-bottom:50px;">
   <div class="card-header" >
-Users    <a style="float:right;" href="users/create">
-        <button class="btn btn-secondary btn-sm">Create New User</button>
+orders    <a style="float:right;" href="orders/create">
+        <button class="btn btn-secondary btn-sm">Create New order</button>
     </a>
 
   </div>
@@ -21,37 +21,38 @@ Users    <a style="float:right;" href="users/create">
         @if (Session::has('message'))
             <div class="alert alert-info">{{ Session::get('message') }}</div>
         @endif
-        @if($users->count() > 0)
+        @if($orders->count() > 0)
 
         <table class="table table-striped table-sm table-responsive">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Mobile</th>
-              <th scope="col">Email</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Note</th>
               <th scope="col">Created</th>
               <th scope="col">Modified</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($users as $user)
+            @foreach($orders as $order)
             <tr>
-              <th scope="row">{{$user->id}}</th>
-              <td><a href="users/{{$user->id}}">{{$user->firstname}}</a></td>
-              <td>{{$user->mobile}}</td>
-              <td>{{$user->email}}</td>
-              <td>{{$user->created_at->toFormattedDateString()}}</td>
-              <td>{{$user->updated_at->toFormattedDateString()}}</td>
+              <th scope="row">{{$order->id}}</th>
+              <td><a href="orders/{{$order->id}}">{{$order->name}}</a></td>
+              <td>{{$order->topic}}</td>
+              <td>{{$order->customer_id}}</td>
+              <td>{{$order->merchant_id}}</td>
+              <td>{{$order->created_at}}</td>
+              <td>{{$order->updated_at}}</td>
 
               <td>
               <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{{ URL::to('admin/users/' . $user->id . '/edit') }}">
+                  <a href="{{ URL::to('admin/orders/' . $order->id . '/edit') }}">
                         <button type="button" onclick="ConfirmDelete()" class="btn btn-warning btn-sm">Edit</button>
                   </a>&nbsp;
  
-                  {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/users/'.$user->id, 'onsubmit' => 'return ConfirmDelete()')) }}
+                  {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/orders/'.$order->id, 'onsubmit' => 'return ConfirmDelete()')) }}
                   {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) }}
                   {{ Form::close() }}
               </div>
@@ -61,7 +62,7 @@ Users    <a style="float:right;" href="users/create">
           </tbody>
         </table>
         @else
-            <p>No a user for the market!</p>
+            <p>No order for the market!</p>
         @endif
 
     </div>

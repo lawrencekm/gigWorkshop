@@ -20,9 +20,9 @@
 
 
 {!! Form::open([
-    'url' => 'admin/users/store',
+    'url' => 'admin/users',
     'method' => 'post'
-]) !!}
+    ]) !!}
 
 <div class="row">
         <div class="form-group col">

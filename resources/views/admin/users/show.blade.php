@@ -11,7 +11,7 @@ return confirm('Are you sure?');
 
 <div class="card uper" style="margin-bottom:50px;">
   <div class="card-header" >
-  <p>You are viewing an existing Education Level</p>
+  <p>You are viewing an existing type of work</p>
 
   </div>
   <div class="card-body">
@@ -25,7 +25,7 @@ return confirm('Are you sure?');
         <div class="col-lg-12 margin-tb">
        
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('educationlevels.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('typeofworks.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -34,37 +34,34 @@ return confirm('Are you sure?');
         <div class="col">
             <div class="form-group">
                 <strong>Name:</strong>
-                {{ $educationlevel->name }}
+                {{ $typeofwork->name }}
             </div>
-        </div>
-        <div class="col">
+    
             <div class="form-group">
                 <strong>Description:</strong>
-                {{ $educationlevel->description }}
+                {{ $typeofwork->description }}
             </div>
-        </div>
-        <div class="col">
+       
             <div class="form-group">
                 <strong>Created at:</strong>
-                {{ $educationlevel->created_at }}
+                {{ $typeofwork->created_at }}
             </div>
-        </div>
-    </div>
-    <div class="row">
-    <div class="col">
+
             <div class="form-group">
                 <strong>Note:</strong>
-                {{ $educationlevel->note }}
+                {{ $role->note }}
             </div>
-            <div class="col">
+     
             <div class="form-group">
-                <strong>MOdified at:</strong>
-                {{ $educationlevel->created_at }}
+                <strong>Modified at:</strong>
+                {{ $typeofwork->created_at }}
             </div>
         </div>
+
+
     </div>
          
-        {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/educationlevels/'.$educationlevel->id, 'onsubmit' => 'return ConfirmDelete()')) }}
+        {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/typeofworks/'.$typeofwork->id, 'onsubmit' => 'return ConfirmDelete()')) }}
                   {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) }}
                   {{ Form::close() }}
     </div>
@@ -74,7 +71,7 @@ return confirm('Are you sure?');
 
 
     </div>
-</div>
-</div>
+    </div>
+
 
 @endsection

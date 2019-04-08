@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->date('dob');
             $table->string('referral_code')->unique();
             $table->string('timezone');
-
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->integer('userstatus_id')->unsigned();
@@ -37,7 +36,6 @@ class CreateUsersTable extends Migration
             $table->boolean('available_at_night')->default(true);
             $table->integer('working_status_id')->unsigned(); //working or not working or taking short orders etc...
             $table->foreign('working_status_id')->references('id')->on('workingstatuses'); //working or not working or taking short orders etc...
-
             $table->integer('organization_id')->unsigned();//parent organization
             $table->foreign('organization_id')->references('id')->on('organizations');//parent organization
             $table->string('National_ID');
