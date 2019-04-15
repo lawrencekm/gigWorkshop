@@ -4,6 +4,11 @@ namespace Wezaworkshop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Wezaworkshop\User;
+use Wezaworkshop\Address;
+
+use Wezaworkshop\Userstatus;
+use DB;
+
 class UserController extends Controller
 {
     /**
@@ -26,7 +31,11 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('admin.users.create');
+        $userstatuses = DB::table('userstatuses')->pluck('name','id')->toArray();
+        $workingstatuses = DB::table('workingstatuses')->pluck('name','id')->toArray();
+        $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();
+
+        return view('admin.users.create',compact('userstatuses','workingstatuses','educationlevels'));
     }
 
     /**
@@ -39,6 +48,7 @@ class UserController extends Controller
     {
 
         //Validate
+        /*
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
@@ -66,19 +76,43 @@ class UserController extends Controller
             'last_login' => 'required',
            
         ]);
-        
-        $user = User::create(['firstname' => $request->firstname,
+        */
+        $address = new Address;
+        $address->country = $request->country;
+        $address->country_code = $request->country_code;
+        $address->tel = $request->tel;
+        $address->state_province = $request->state_province;
+        $address->city = $request->city;
+        $address->zipcode = $request->zipcode;
+        $address->save();
+        $address_id = $address->id;
+
+        /*
+        $id = DB::table('addresses')->insertGetId(
+            ['country' => $request->country, 
+            'country_code' => $request->country,
+            'tel' => $request->tel,
+            'state_province' => $request->state_province,
+            'city' => $request->city,
+            'zipcode' => $request->zipcode,
+            ]
+        );
+        */
+
+
+        $user = User::create(['last_login' => $request->last_login,
+                            'firstname' => $request->firstname,
                             'lastname' => $request->lastname,
                             'email' => $request->email,
                             'facebook_id' => $request->facebook_id,
                             'altemail' => $request->altemail,
-                            'password' => $request->password,
+                            'password' => bcrypt($request->password),
                             'otp' => $request->otp,
                             'mobile' => $request->mobile,
                             'dob' => $request->dob,
                             'referral_code' => $request->referral_code,
                             'timezone' => $request->timezone,
-                            'address_id' => $request->address_id,
+                            'address_id' => $address_id,
                             'userstatus_id' => $request->userstatus_id,
                             'active' => $request->active,
                             'promo_email_notifications' => $request->promo_email_notifications,
@@ -120,8 +154,12 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $userstatuses = DB::table('userstatuses')->pluck('name','id')->toArray();
+        $workingstatuses = DB::table('workingstatuses')->pluck('name','id')->toArray();
+        $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();
+
         $user = User::find($id);
-        return view('admin.users.edit',compact('user'));
+        return view('admin.users.edit',compact('user','userstatuses','workingstatuses','educationlevels'));
     }
 
     /**
@@ -167,7 +205,15 @@ class UserController extends Controller
            
         ]);
         */
- 
+        $address = new Address;
+        $address->country = $request->country;
+        $address->country_code = $request->country_code;
+        $address->tel = $request->tel;
+        $address->state_province = $request->state_province;
+        $address->city = $request->city;
+        $address->zipcode = $request->zipcode;
+        $address->save();
+        $address_id = $address->id;
 
         $user = User::findOrFail($id);
 
@@ -177,15 +223,13 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->facebook_id = $request->facebook_id;
             $user->altemail = $request->altemail;
-            /*
-            $user->password = $request->password;
-            */
+            $user->password = bcrypt($request->password);
             $user->otp = $request->otp;
             $user->mobile = $request->mobile;
             $user->dob = $request->dob;
             $user->referral_code = $request->referral_code;
             $user->timezone = $request->timezone;
-            $user->address_id = $request->address_id;
+            $user->address_id = $address_id;
             $user->userstatus_id = $request->userstatus_id;
             $user->active = $request->active;
             $user->promo_email_notifications = $request->promo_email_notifications;
@@ -199,6 +243,9 @@ class UserController extends Controller
             $user->last_login_ip = $request->last_login_ip;
             $user->last_login = $request->last_login;
             $user->save();
+
+
+
         //$request->session()->flash('message', 'Successfully modified the user!');
         return redirect('admin/users');
     }

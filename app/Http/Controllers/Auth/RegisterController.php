@@ -30,26 +30,27 @@ class RegisterController extends Controller
      */
     //protected $redirectTo = '/home';
     protected function redirectTo(){
+        $id = Auth::id();
 
-        $roles = Auth::user()->roles;
-        //role 1 is admin, 2 is manager etc
-        if($roles->contains(1)){
-            return  '/admin/dashboard';
+        $roles = User::find($id)->roles;
+        
+        if($roles->contains(4)){
+            return  '/admin';
 
-        }elseif($roles->contains(2)) {
-            return '/manager/dashboard';
+        }elseif($roles->contains(5)) {
+            return '/manager';
 
-        }elseif($roles->contains(3)){
-            return '/officer/dashboard';
+        }elseif($roles->contains(6)){
+            return '/officer';
 
-        }elseif($roles->contains(4)){
-            return '/customer/dashboard';
+        }elseif($roles->contains(8)){
+            return '/customer';
 
-        }elseif($roles->contains(5)){
-            return '/merchant/dashboard';
+        }elseif($roles->contains(7)){
+            return '/merchant';
 
         }else{
-            return '/public/dashboard';
+            return '/public';
         }
 
     }

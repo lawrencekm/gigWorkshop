@@ -30,22 +30,22 @@ class LoginController extends Controller
     //protected $redirectTo = '/home';
     protected function redirectTo(){
         $id = Auth::id();
-     
+
         $roles = User::find($id)->roles;
         
-        if($roles->contains(1)){
+        if($roles->contains(4)){
             return  '/admin';
 
-        }elseif($roles->contains(2)) {
+        }elseif($roles->contains(5)) {
             return '/manager';
 
-        }elseif($roles->contains(3)){
+        }elseif($roles->contains(6)){
             return '/officer';
 
-        }elseif($roles->contains(4)){
+        }elseif($roles->contains(8)){
             return '/customer';
 
-        }elseif($roles->contains(5)){
+        }elseif($roles->contains(7)){
             return '/merchant';
 
         }else{

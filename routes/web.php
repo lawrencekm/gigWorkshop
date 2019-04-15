@@ -23,7 +23,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+//Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+Route::group(['prefix' => 'admin'], function()
+
 {
     Route::resource('educationlevels','EducationlevelController');
     Route::resource('disciplines','DisciplineController');

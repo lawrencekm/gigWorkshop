@@ -11,7 +11,7 @@ return confirm('Are you sure?');
 
 <div class="card uper" style="margin-bottom:50px;">
   <div class="card-header" >
-  <p>You are viewing an existing type of work</p>
+  <p>You are viewing an existing user</p>
 
   </div>
   <div class="card-body">
@@ -25,7 +25,7 @@ return confirm('Are you sure?');
         <div class="col-lg-12 margin-tb">
        
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('typeofworks.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -34,17 +34,17 @@ return confirm('Are you sure?');
         <div class="col">
             <div class="form-group">
                 <strong>Name:</strong>
-                {{ $typeofwork->name }}
+                {{ $user->name }}
             </div>
     
             <div class="form-group">
                 <strong>Description:</strong>
-                {{ $typeofwork->description }}
+                {{ $user->description }}
             </div>
        
             <div class="form-group">
                 <strong>Created at:</strong>
-                {{ $typeofwork->created_at }}
+                {{ $user->created_at }}
             </div>
 
             <div class="form-group">
@@ -54,14 +54,14 @@ return confirm('Are you sure?');
      
             <div class="form-group">
                 <strong>Modified at:</strong>
-                {{ $typeofwork->created_at }}
+                {{ $user->created_at }}
             </div>
         </div>
 
 
     </div>
          
-        {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/typeofworks/'.$typeofwork->id, 'onsubmit' => 'return ConfirmDelete()')) }}
+        {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/users/'.$user->id, 'onsubmit' => 'return ConfirmDelete()')) }}
                   {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) }}
                   {{ Form::close() }}
     </div>

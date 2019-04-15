@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'email', 'password','userstatus_id','educationlevel_id','workingstatus_id','address_id'
     ];
 
     /**
@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
     //1:1 with address
     public function address(){
-        return $this->morphMany('Wezaworkshop\Address','addressable');
+        return $this->belongsTo('Wezaworkshop\Address');
     }
     public function payments(){
         return $this->hasMany('Wezaworkshop\Payment');

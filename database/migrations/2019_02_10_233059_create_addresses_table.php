@@ -22,7 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('state_province');
             $table->string('city');
             $table->string('zipcode');
-            $table->string('note');
+            $table->string('note')->nullable();
 
         });
     }

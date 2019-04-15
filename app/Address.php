@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     //
-    public function addressable(){
-        return $this->morphTo();
+    public function user(){
+        return $this->hasOne('Wezaworkshop\User');
     }
 
 }

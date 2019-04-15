@@ -56,6 +56,7 @@
         <a class="dropdown-item" href="/index.php/admin/addresses">Addresses</a>
         <a class="dropdown-item" href="/index.php/admin/educationlevels">Education Levels</a>
         <a class="dropdown-item" href="/index.php/admin/workingstatuses">Working Status</a>
+        <a class="dropdown-item" href="/index.php/admin/userstatuses">User Status</a>
         <a class="dropdown-item" href="/index.php/admin/userdocuments">User documents</a>
         <a class="dropdown-item" href="/index.php/admin/disciplines">Disciplines</a>
         <a class="dropdown-item" href="/index.php/admin/roles">Roles</a>
