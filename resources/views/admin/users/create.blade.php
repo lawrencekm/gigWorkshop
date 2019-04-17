@@ -1,5 +1,4 @@
 @extends('layouts.admin.side')
-
 @section('content')
 <div class="col-sm-9">
 

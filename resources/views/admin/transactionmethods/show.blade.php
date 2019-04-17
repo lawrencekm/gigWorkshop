@@ -49,7 +49,7 @@ return confirm('Are you sure?');
 
             <div class="form-group">
                 <strong>Note:</strong>
-                {{ $role->note }}
+                {{ $transactionmethod->note }}
             </div>
      
             <div class="form-group">

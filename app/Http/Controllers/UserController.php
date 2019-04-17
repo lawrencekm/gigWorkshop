@@ -244,8 +244,6 @@ class UserController extends Controller
             $user->last_login = $request->last_login;
             $user->save();
 
-
-
         //$request->session()->flash('message', 'Successfully modified the user!');
         return redirect('admin/users');
     }

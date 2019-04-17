@@ -25,29 +25,29 @@ class CreateOrdersTable extends Migration
             $table->foreign('typeofwork_id')->references('id')->on('typeofworks');
             $table->integer('citation_id')->unsigned()->nullable();
             $table->foreign('citation_id')->references('id')->on('citations');
-            $table->integer('sources');
+            $table->integer('sources')->nullable();
             $table->integer('provide_sources');
             $table->string('educationlevel_id');
             $table->string('spacing');
-            $table->string('preferred_writer'); //or bid
-            $table->string('support_note'); //by support team
+            $table->string('preferred_writer')->nullable(); //or bid
+            $table->string('support_note')->nullable(); //by support team
             $table->string('short_description');//by customer
             $table->integer('transactionstatus_id')->unsigned();
             $table->foreign('transactionstatus_id')->references('id')->on('transactionstatuses');
             $table->float('price'); //company pay
-            $table->integer('pages');
-            $table->integer('slides');
+            $table->integer('pages')->default(0);
+            $table->integer('slides')->default(0);
             $table->float('cost'); //merchant pay
             $table->datetime('deadline');
-            $table->datetime('assigned_at');
-            $table->datetime('completed_at');
+            $table->datetime('assigned_at')->nullable();
+            $table->datetime('completed_at')->nullable();
             $table->boolean('customer_paid')->default(false); 
             $table->boolean('merchant_paid')->default(false);
             $table->boolean('preview')->default(false); //sample paper
             $table->string('preview_link');
             $table->boolean('urgent')->default(false);
-            $table->integer('rating_by_customer');
-            $table->integer('rating_by_merchant');
+            $table->integer('rating_by_customer')->default(0);;
+            $table->integer('rating_by_merchant')->default(0);;
             
         });
     }

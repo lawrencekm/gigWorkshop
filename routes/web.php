@@ -1,5 +1,5 @@
 <?php
-
+use DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,19 @@ Route::get('/test', function(){
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/registercustomer', function () {
+    $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();
+    $citations = DB::table('citations')->pluck('name','id')->toArray();
+    $typeofworks = DB::table('typeofworks')->pluck('name','id')->toArray();
+
+    return view('auth.customer_register',compact('educationlevels','citations','typeofworks'));
+});
+Route::get('/registermerchant', function () {
+    $userstatuses = DB::table('userstatuses')->pluck('name','id')->toArray();
+    $workingstatuses = DB::table('workingstatuses')->pluck('name','id')->toArray();
+    $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();
+    return view('auth.merchant_register',compact('userstatuses','workingstatuses','educationlevels'));
+})->name('registermerchant');
 
 Auth::routes();
 

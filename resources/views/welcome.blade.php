@@ -72,7 +72,9 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ url('registercustomer') }}">Place an order</a>
+                        <a href="{{ route('registermerchant') }}">Work with us</a>
+
                     @endauth
                 </div>
             @endif
