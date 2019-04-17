@@ -31,34 +31,34 @@
 <div class="row">
         <div class="form-group col-md-3">
             {!! Form::label('firstname', 'Firstname:', ['class' => 'control-label']) !!}
-            {!! Form::text('firstname', null, ['class' => 'form-control']) !!}
+            {!! Form::text('firstname', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3" >
             {!! Form::label('lastname', 'Lastname:', ['class' => 'control-label']) !!}
-            {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
+            {!! Form::text('lastname', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3" >
             {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
-            {!! Form::email('email', null, ['class' => 'form-control']) !!}
+            {!! Form::email('email', null, ['class' => 'form-control','required' => 'required']) !!}
             </div>
         <div class="form-group col-md-3" >
 
             {!! Form::label('altemail', 'Alternate Email:', ['class' => 'control-label']) !!}
-            {!! Form::email('altemail', null, ['class' => 'form-control']) !!}
+            {!! Form::email('altemail', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
 </div>
 <div class="row">
         <div class="form-group col-md-3">
             {!! Form::label('facebook_id', 'Facebook ID:', ['class' => 'control-label']) !!}
-            {!! Form::text('facebook_id', null, ['class' => 'form-control']) !!}
+            {!! Form::text('facebook_id', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3">
             {!! Form::label('password', 'Password:', ['class' => 'control-label']) !!}
-            {!! Form::password('password', null, ['class' => 'form-control']) !!}
+            {!! Form::password('password', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3">
             {!! Form::label('password_confirmation', 'Confirm Password:', ['class' => 'control-label']) !!}
-            {!! Form::password('password_confirmation', null, ['class' => 'form-control']) !!}
+            {!! Form::password('password_confirmation', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
       
 
@@ -67,11 +67,11 @@
 <div class="row">
         <div class="form-group col-md-3" >
             {!! Form::label('mobile', 'Mobile:', ['class' => 'control-label']) !!}
-            {!! Form::number('mobile', null, ['class' => 'form-control']) !!}
+            {!! Form::number('mobile', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3">
             {!! Form::label('dob', 'Date of Birth:', ['class' => 'control-label']) !!}
-            {!! Form::date('dob', '1995-08-19', ['class' => 'form-control']) !!}
+            {!! Form::date('dob', '1995-08-19', ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3">
             {!! Form::label('referral_code', 'Ref Code:', ['class' => 'control-label']) !!}
@@ -84,7 +84,7 @@
             <?php  $timezone_array = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
             $timezones = array_combine($timezone_array, $timezone_array);
             ?>
-            {!! Form::select('timezone', $timezones, ['class' => 'form-control']) !!}
+            {!! Form::select('timezone', $timezones , ['class' => 'form-control']) !!}
         </div>
 
 </div>
@@ -98,7 +98,7 @@
         </div>
         <div class="form-group col-md-2">
             {!! Form::label('country_code', 'Country code:', ['class' => 'control-label']) !!}
-            {!! Form::number('country_code', null, ['class' => 'form-control']) !!}
+            {!! Form::number('country_code', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-3">
             {!! Form::label('tel', 'Telephone:', ['class' => 'control-label']) !!}
@@ -109,16 +109,16 @@
 <div class="row">
 <div class="form-group col-md-3">
             {!! Form::label('state_province', 'State/province:', ['class' => 'control-label']) !!}
-            {!! Form::text('state_province', null, ['class' => 'form-control']) !!}
+            {!! Form::text('state_province', null, ['class' => 'form-control','required' => '']) !!}
         </div>
 
         <div class="form-group col-md-2">
             {!! Form::label('city', 'City/Town:', ['class' => 'control-label']) !!}
-            {!! Form::text('city', null, ['class' => 'form-control']) !!}
+            {!! Form::text('city', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
         <div class="form-group col-md-2">
             {!! Form::label('zipcode', 'Zipcode:', ['class' => 'control-label']) !!}
-            {!! Form::text('zipcode', null, ['class' => 'form-control']) !!}
+            {!! Form::text('zipcode', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
 
 
@@ -127,24 +127,24 @@
 
             <div class="form-group col-md-2">
             {!! Form::label('active', 'Active:', ['class' => 'control-label']) !!}
-            {!! Form::checkbox('active', null, ['class' => 'form-control']) !!}
+            {!! Form::checkbox('active', '1',true, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group col-md-2">
 
             {!! Form::label('promo_email_notifications', 'Promo Email:', ['class' => 'control-label']) !!}
-            {!! Form::checkbox('promo_email_notifications', null, ['class' => 'form-control']) !!}
+            {!! Form::checkbox('promo_email_notifications', '1',true, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group col-md-2">
 
             {!! Form::label('order_email_notifications', 'Order Email:', ['class' => 'control-label']) !!}
-            {!! Form::checkbox('order_email_notifications', null, ['class' => 'form-control']) !!}
+            {!! Form::checkbox('order_email_notifications', '1',true, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group col-md-3">
 
             {!! Form::label('available_at_night', 'Available Nighttime:', ['class' => 'control-label']) !!}
-            {!! Form::checkbox('available_at_night', null, ['class' => 'form-control']) !!}
+            {!! Form::checkbox('available_at_night', '1',true, ['class' => 'form-control']) !!}
             </div>
 
         </div>
@@ -167,7 +167,7 @@
         </div>
         <div class="form-group col-md-3">
             {!! Form::label('National_ID', 'National ID:', ['class' => 'control-label']) !!}
-            {!! Form::text('National_ID', null, ['class' => 'form-control']) !!}
+            {!! Form::text('National_ID', null, ['class' => 'form-control','required' => 'required']) !!}
         </div>
 
 </div>
@@ -177,17 +177,10 @@
             {!! Form::label('note', 'Note:', ['class' => 'control-label']) !!}
             {!! Form::text('note', null, ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group col-md-3">
-            {!! Form::label('last_login_ip', 'Last Login Ip:', ['class' => 'control-label']) !!}
-            {!! Form::text('last_login_ip', null, ['class' => 'form-control']) !!}
-        </div>
-        <div class="form-group col-md-3">
-            {!! Form::label('last_login', 'Last Login:', ['class' => 'control-label']) !!}
-            {!! Form::date('last_login', null, ['class' => 'form-control']) !!}
-        </div>
+
         <div class="form-group col-md-3">
             {!! Form::label('educationlevel_id', 'Education Level:', ['class' => 'control-label']) !!}
-            {!!Form::select('educationlevel_id', $educationlevels, null, ['class' => 'form-control'])!!}
+            {!!Form::select('educationlevel_id', $educationlevels, null, ['class' => 'form-control','required' => 'required'])!!}
 
         </div>
 </div>

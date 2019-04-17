@@ -166,7 +166,6 @@ class RegisterController extends Controller
             $user->email = $data['email'];
             $user->password = bcrypt($data['password']);
             $user->address_id = $address_id;
-
             $user->facebook_id = $data['facebook_id'];
             $user->altemail = $data['altemail'];
             $user->otp = mt_rand(10000,99999);
@@ -184,8 +183,8 @@ class RegisterController extends Controller
             $user->organization_id = $data['organization_id'];
             $user->National_ID = $data['National_ID'];
             $user->educationlevel_id = $data['educationlevel_id'];
-
             $user->save();
+            
             $user->roles()->attach($role_id);
 
             return $user;
