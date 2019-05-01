@@ -96,7 +96,7 @@
       @endguest
 
       <li style="float:right" class="nav-item">
-          <span  class="nav-link"  >Hi,{{-- Auth::user()->firstname --}} . Your Time:/span>
+          <span  class="nav-link"  >Hi, {{ Auth::user()->firstname}} . Your Time:/span>
       </li> 
   </ul>
 

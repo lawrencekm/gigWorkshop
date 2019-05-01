@@ -43,10 +43,10 @@ class LoginController extends Controller
             return '/officer';
 
         }elseif($roles->contains(8)){
-            return '/customer';
+            return '/customer/customer';
 
         }elseif($roles->contains(7)){
-            return '/merchant';
+            return '/merchant/merchant';
 
         }else{
             return '/public';

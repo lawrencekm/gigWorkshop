@@ -1,5 +1,7 @@
 <?php
-use DB;
+//use \DB;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,8 @@ Route::get('/test', function(){
   //dd($user);
 });
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+
     return view('welcome');
 });
 Route::get('/registercustomer', function () {
@@ -144,11 +147,16 @@ Route::group(['prefix'=>'officer','middleware'=>'officer'],function(){
 });
 
 Route::group(['prefix'=>'customer'],function(){
-    Route::get('/', function(){ return view('customer.dashboard');});
+    Route::resource('customer', 'Customer\CustomerController');
+   // Route::get('customer/take/{id}','Merchant\MerchantController@take');
 
 });
 Route::group(['prefix'=>'merchant'],function(){
-    Route::get('/', function(){ return view('merchant.dashboard');});
+    //Route::get('/', function(){ return view('merchant.dashboard');});
+    Route::resource('merchant','Merchant\MerchantController');
+
+    Route::get('merchant/take/{id}','Merchant\MerchantController@take');
+
 
 });
 Route::group(['prefix'=>'public'],function(){

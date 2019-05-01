@@ -49,7 +49,7 @@ orders    <a style="float:right;" href="orders/create">
               <td>
               <div class="btn-group" role="group" aria-label="Basic example">
                   <a href="{{ URL::to('admin/orders/' . $order->id . '/edit') }}">
-                        <button type="button" onclick="ConfirmDelete()" class="btn btn-warning btn-sm">Edit</button>
+                        <button type="button" onclick="ConfirmDelete()" class="btn btn-warning btn-sm">Review</button>
                   </a>&nbsp;
  
                   {{ Form::open(array( 'method' => 'delete', 'url' => 'admin/orders/'.$order->id, 'onsubmit' => 'return ConfirmDelete()')) }}
