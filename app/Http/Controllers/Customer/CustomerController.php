@@ -4,8 +4,11 @@ namespace Wezaworkshop\Http\Controllers\Customer;
 
 use Wezaworkshop\Models\Customer\Customer;
 use Wezaworkshop\Order;
+use Wezaworkshop\Document;
+
 use Auth;
 use DB;
+use Strorage;
 use Illuminate\Http\Request;
 use Wezaworkshop\Http\Controllers\Controller;
 
@@ -22,6 +25,8 @@ class CustomerController extends Controller
         $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();
         $citations = DB::table('citations')->pluck('name','id')->toArray();
         $typeofworks = DB::table('typeofworks')->pluck('name','id')->toArray();
+        $documenttypes = DB::table('documenttypes')->pluck('name','id')->toArray();
+
     
 
         $orders = Order::all();
@@ -31,7 +36,7 @@ class CustomerController extends Controller
         $cancelledOrders = Order::where('customer_id',Auth::user()->id)->get();
         $completedOrders =Order::where('customer_id',Auth::user()->id)->get();
 
-        return view('customer.dashboard', compact('educationlevels','citations','typeofworks','orders','currentOrders','revisionOrders','disputeOrders','cancelledOrders','completedOrders'));
+        return view('customer.dashboard', compact('educationlevels','citations','typeofworks','documenttypes','orders','currentOrders','revisionOrders','disputeOrders','cancelledOrders','completedOrders'));
     
     }
 
@@ -54,9 +59,16 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+        $uploader = Auth::user()->id;
+
+
+
+
+
+
         $order = new Order;
         $order->topic = $request->topic;
-        $order->customer_id = Auth::user()->id;
+        $order->customer_id =  $uploader;
         $order->merchant_id = $request->merchant_id;
         $order->orderstatus_id = $request->orderstatus_id;
         $order->typeofwork_id = $request->typeofwork_id;
@@ -84,6 +96,29 @@ class CustomerController extends Controller
         $order->rating_by_customer = $request->rating_by_customer;
         $order->rating_by_merchant = 0;
         $order->save();
+
+        $order_id = $order->id;
+        
+       
+
+        if($request->hasfile('filename'))
+        {
+           foreach($request->file('filename') as $file)
+           {
+               $path = $file->store('docs');
+               //save in documents
+               $document = new Document;
+               $document->user_id = $uploader;
+               $document->order_id = $order_id;
+               $document->documenttype_id = $request->documenttype_id;
+               $document->name = $path;
+               $document->description = $request->document_description;
+               $document->note = 'note';
+
+               $document->save();
+
+           }
+        }
 
         $request->session()->flash('message', 'You have Successfully placed an order! A freelancer will be assigned ASAP');
         return redirect('customer/customer');

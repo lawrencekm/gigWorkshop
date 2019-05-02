@@ -2,6 +2,24 @@
 
 @section('content')
 
+         <script type="text/javascript">
+
+
+$(document).ready(function() {
+
+  $(".add").click(function(){ 
+      var html = $(".clone").html();
+      $(".increment").after(html);
+  });
+
+  $("body").on("click",".remove",function(){ 
+      $(this).parents(".control-group").remove();
+  });
+
+});
+
+</script>
+
 
 <div class="col-sm-9">
 
@@ -40,7 +58,7 @@
                 <div class="panel-heading">Place an order</div>
 
                 <div class="panel-body">                  
-                @if ($errors->any())
+    @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -52,7 +70,11 @@
 
 
 
-          {!! Form::open(['url'=>'customer/customer','method'=>'post']) !!}
+          {!! Form::open(['url'=>'customer/customer',
+                           'method'=>'post',
+                           'enctype' => 'multipart/form-data'
+                           ]) 
+          !!}
 
 
 
@@ -90,7 +112,7 @@
             {!! Form::label('pages', 'Pages:', ['class' => 'control-label']) !!}
             {!! Form::number('pages', null, ['class' => 'form-control']) !!}
         </div>
-        </div>
+</div>
 <div class="row">
         <div class="form-group col-md-4">
 
@@ -140,7 +162,35 @@
             {!! Form::text('cost', null, ['class' => 'form-control']) !!}
         </div>
 
+
+        <div class="form-group col-md-4">
+
+            {!! Form::label('documenttype_id', 'Ducument type:', ['class' => 'control-label']) !!}
+            {!! Form::select('documenttype_id', $documenttypes, null, ['class' => 'form-control']) !!}
+            </div>
+        <div class="form-group col-md-4">
+
+            {!! Form::label('document_description', 'Ducument Description:', ['class' => 'control-label']) !!}
+            {!! Form::text('document_description', null, ['class' => 'form-control']) !!}
+        </div>
 </div>
+<br>
+
+        <div class="input-group control-group increment" >
+          <input type="file" name="filename[]" class="form-control">
+          <div class="input-group-btn"> 
+            <button class="add btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+          </div>
+        </div>
+        <div class="clone hide">
+          <div class="control-group input-group" style="margin-top:10px">
+            <input type="file" name="filename[]" class="form-control">
+            <div class="input-group-btn"> 
+              <button class="remove btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+            </div>
+          </div>
+        </div>
+
 
 {!! Form::submit('Place order', ['class' => 'btn btn-secondary']) !!}
 <input style="float:right;" type="reset">
