@@ -68,7 +68,7 @@
 
               <div class="btn-group">
         <button class="btn btn-sm dropdown-toggle text-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Transactions
+        Orders
         </button>
         <div class="dropdown-menu">
 

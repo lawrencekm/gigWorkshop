@@ -62,10 +62,6 @@ class CustomerController extends Controller
         $uploader = Auth::user()->id;
 
 
-
-
-
-
         $order = new Order;
         $order->topic = $request->topic;
         $order->customer_id =  $uploader;
@@ -144,9 +140,11 @@ class CustomerController extends Controller
      * @param  \Wezaworkshop\Models\Customer\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Customer $customer, $id)
     {
         //
+        return view('customer.orders.edit',compact('order'));
+
     }
 
     /**

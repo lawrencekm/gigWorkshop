@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->foreign('orderstatus_id')->references('id')->on('orderstatuses');
             $table->integer('typeofwork_id')->unsigned();
             $table->foreign('typeofwork_id')->references('id')->on('typeofworks');
+            $table->integer('discipline_id')->unsigned()->nullable();
+            $table->foreign('discipline_id')->references('id')->on('disciplines');
             $table->integer('citation_id')->unsigned()->nullable();
             $table->foreign('citation_id')->references('id')->on('citations');
             $table->integer('sources')->nullable();
@@ -34,10 +36,12 @@ class CreateOrdersTable extends Migration
             $table->string('short_description');//by customer
             $table->integer('transactionstatus_id')->unsigned();
             $table->foreign('transactionstatus_id')->references('id')->on('transactionstatuses');
-            $table->float('price'); //company pay
+            $table->integer('paymentstatus_id')->unsigned();
+            $table->foreign('paymentstatus_id')->references('id')->on('paymentstatuses');
+            $table->decimal('price'); //company pay
             $table->integer('pages')->default(0);
             $table->integer('slides')->default(0);
-            $table->float('cost'); //merchant pay
+            $table->decimal('cost'); //merchant pay
             $table->datetime('deadline');
             $table->datetime('assigned_at')->nullable();
             $table->datetime('completed_at')->nullable();
@@ -45,7 +49,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('merchant_paid')->default(false);
             $table->boolean('preview')->default(false); //sample paper
             $table->string('preview_link');
-            $table->boolean('urgent')->default(false);
+            $table->integer('urgent')->default(false);
             $table->integer('rating_by_customer')->default(0);;
             $table->integer('rating_by_merchant')->default(0);;
             

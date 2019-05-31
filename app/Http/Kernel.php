@@ -31,7 +31,7 @@ class Kernel extends HttpKernel
             \Wezaworkshop\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Wezaworkshop\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -57,5 +57,15 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Wezaworkshop\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'adminUser' => \Wezaworkshop\Http\Middleware\AdminUser::class,
+        'managerUser' => \Wezaworkshop\Http\Middleware\ManagerUser::class,
+        'officerUser' => \Wezaworkshop\Http\Middleware\OfficerUser::class,
+        'customerUser' => \Wezaworkshop\Http\Middleware\CustomerUser::class,
+        'merchantUser' => \Wezaworkshop\Http\Middleware\MerchantUser::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+
+
+
     ];
 }

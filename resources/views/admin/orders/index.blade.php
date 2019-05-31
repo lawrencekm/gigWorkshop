@@ -31,14 +31,16 @@ orders    <a style="float:right;" href="orders/create">
               <th scope="col">Description</th>
               <th scope="col">Note</th>
               <th scope="col">Created</th>
+              <th scope="col">Created</th>
               <th scope="col">Modified</th>
               <th scope="col">Action</th>
+
             </tr>
           </thead>
           <tbody>
             @foreach($orders as $order)
             <tr>
-              <th scope="row">{{$order->id}}</th>
+              <td scope="row">{{$order->id}}</td>
               <td><a href="orders/{{$order->id}}">{{$order->name}}</a></td>
               <td>{{$order->topic}}</td>
               <td>{{$order->customer_id}}</td>

@@ -63,7 +63,7 @@ return confirm('Are you sure?');
             <div class="form-group"> <strong>spacing:</strong>
                 {{ $order->spacing }}
             </div>
-            <div class="form-group"> <strong>preferred_writer:</strong>
+            <div class="form-group"> <strong>preferred_writerr:</strong>
                 {{ $order->preferred_writer }}
             </div>
         </div>

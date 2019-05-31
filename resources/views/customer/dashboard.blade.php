@@ -220,7 +220,7 @@ $(document).ready(function() {
 
         <div class="card uper" style="margin-bottom:50px;">
         <div class="card-header" >
-          The{{ $currentOrders->count() }} order(s) you are currently working on will be listed here
+          Your {{ $currentOrders->count() }} current order(s) in the workshop will be listed here.
           
           <a style="float:right;" href="#">
               <button class="btn btn-secondary btn-sm">Refresh</button>
@@ -259,9 +259,11 @@ $(document).ready(function() {
                     <td>{{$currentOrder->updated_at}}</td>
                     <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="{{ URL::to('customer/' . $currentOrder->id . '/edit') }}">
+                    <a href="{{ URL::to('customer/order/' . $currentOrder->id . '/edit') }}">
                               <button type="button" onclick="confirmReview()" class="btn btn-warning btn-sm">Edit</button>
                         </a>&nbsp;
+
+    
 
                         {{ Form::open(array( 'method' => 'show', 'url' => 'customer/customer/'.$currentOrder->id, 'onsubmit' => 'return ConfirmDelete()')) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-success btn-sm']) }}

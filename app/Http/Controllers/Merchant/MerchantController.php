@@ -22,7 +22,7 @@ class MerchantController extends Controller
         //
         $orders = Order::all();
         $currentOrders = Order::where('merchant_id',Auth::user()->id)->get();
-        $revisionOrders = Order::where('merchant_id',Auth::user()->id)->get();
+        $revisionOrders = Order::where('merchant_id',Auth::user()->id)->where('status')->get();
         $disputeOrders = Order::where('merchant_id',Auth::user()->id)->get();
         $cancelledOrders = Order::where('merchant_id',Auth::user()->id)->get();
         $completedOrders =Order::where('merchant_id',Auth::user()->id)->get();

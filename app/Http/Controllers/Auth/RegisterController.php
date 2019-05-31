@@ -7,6 +7,8 @@ use Wezaworkshop\User;
 use Wezaworkshop\Order;
 use Wezaworkshop\Address;
 use Wezaworkshop\Role;
+use Wezaworkshop\Document;
+
 use Auth;
 
 use Wezaworkshop\Http\Controllers\Controller;
@@ -49,7 +51,7 @@ class RegisterController extends Controller
             return '/officer';
 
         }elseif($roles->contains(8)){
-            return '/customer';
+            return '/customer/customer';
 
         }elseif($roles->contains(7)){
             return '/merchant';
@@ -117,8 +119,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $role_id = Role::where('name','like',$data['role'])->select('id')->first();
-        if($data['role'] == 'customer'){
+            $role_id = Role::where('name','like',$data['role'])->select('id')->first();
+
+            if($data['role'] == 'customer'){
+                
             $user = new User;
             $user->firstname = $data['firstname'];
             $user->lastname = $data['lastname'];
@@ -132,6 +136,14 @@ class RegisterController extends Controller
             $order = new Order;
             $order->topic = $data['topic'];
             $order->customer_id = $customer;
+            $order->orderstatus_id = $data['orderstatus_id'];
+            $order->discipline_id = $data['discipline_id'];
+            $order->preferred_writer = $data['preferred_writer'];
+            $order->transactionstatus_id = $data['transactionstatus_id'];
+            $order->paymentstatus_id = $data['paymentstatus_id'];
+            $order->price = $data['price'];
+            $order->customer_paid = $data['customer_paid'];
+            $order->merchant_paid = $data['merchant_paid'];
             $order->typeofwork_id = $data['typeofwork_id'];
             $order->citation_id = $data['citation_id'];
             $order->provide_sources = $data['provide_sources'];
@@ -145,7 +157,48 @@ class RegisterController extends Controller
             $order->preview = $data['preview'];
             $order->urgent = $data['urgent'];
             $order->save();
+            
 
+            
+            if(!empty($data['documents']))
+            {
+            $allowedfileExtension=['pdf','jpg','png','docx'];
+            $files = $request->file('documents');
+                foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                //dd($check);
+                    if($check)
+                    {
+                        foreach ($request->documents as $document) {
+                            $filename = $document->store('additional_documents');
+
+                            $document = new Document;
+                            $document->order_id = $order->id;
+                            $document->user_id = $customer;
+                            $document->documenttype_id = $data['documenttype_id'];
+                            $document->name = $filename;
+                            $document->description = $filename;
+                            $document->note = 'note';
+                            //$document->save();
+                            $document_id = $document->id;
+
+                            $order->documents()->save($document);   
+                        }
+                    //$request->session()->flash('message', 'Successfully uploaded!');
+                    }
+                    else
+                    {
+                    //echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+                    }
+                }
+            }
+            
+
+
+
+//dd($user)
             return $user;
 
         }

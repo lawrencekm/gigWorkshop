@@ -16,6 +16,9 @@ class Order extends Model
     public function bids(){
         return $this->hasMany('Wezaworkshop\Bid');
     }
+    public function documents(){
+        return $this->hasMany('Wezaworkshop\Document');
+    }
     public function transactions(){
         return $this->hasMany('Wezaworkshop\Transaction');
     }
@@ -28,4 +31,5 @@ class Order extends Model
     public function citation(){
         return $this->belongsTo('Wezaworkshop\Citation');
     }
+
 }

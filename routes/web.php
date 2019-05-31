@@ -2,6 +2,14 @@
 //use \DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use Wezaworkshop\Mail\OrderUpdated;
+use GuzzleHttp\Client;
+use Wezaworkshop\Role;
+
+
+
+//use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +21,19 @@ use Carbon\Carbon;
 |
 */
 Route::get('/test', function(){
-    //echo "found";
-  //dd($user);
+
+
+    /*Mail::to('lawrencekm04@gmail.com')
+    ->cc('lawrenceknjenga@gmail.com')
+    ->bcc('lawrence@wezadata.co.ke')
+    ->send(new OrderUpdated);
+    */
+
+    //tests the template
+    return new OrderUpdated;
+
+    
+
 });
 
 Route::get('/', function (Request $request) {
@@ -25,9 +44,22 @@ Route::get('/registercustomer', function () {
     $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();
     $citations = DB::table('citations')->pluck('name','id')->toArray();
     $typeofworks = DB::table('typeofworks')->pluck('name','id')->toArray();
+    $orderstatuses = DB::table('orderstatuses')->pluck('name','id')->toArray();
+    $merchantRole = Role::where('name','like','merchant')->first();
+    $merchants = $merchantRole->users->pluck('firstname','id')->toArray();
+    //$customerRole = Role::where('name','like','customer')->first();
+    //$customers = $customerRole->users->pluck('firstname','id')->toArray();
+    $transactionstatuses = DB::table('transactionstatuses')->pluck('name','id')->toArray();
+    $paymentstatuses = DB::table('paymentstatuses')->pluck('name','id')->toArray();
+    $documenttypes = DB::table('documenttypes')->pluck('name','id')->toArray();
+    $disciplines = DB::table('disciplines')->pluck('name','id')->toArray();
 
-    return view('auth.customer_register',compact('educationlevels','citations','typeofworks'));
+    $allusers = DB::table('users')->pluck('firstname','id')->toArray();
+
+    return view('auth.customer_register',compact('educationlevels','citations','typeofworks','orderstatuses',
+    'merchants','transactionstatuses','paymentstatuses','documenttypes','disciplines','allusers'));
 });
+
 Route::get('/registermerchant', function () {
     $userstatuses = DB::table('userstatuses')->pluck('name','id')->toArray();
     $workingstatuses = DB::table('workingstatuses')->pluck('name','id')->toArray();
@@ -35,18 +67,23 @@ Route::get('/registermerchant', function () {
     return view('auth.merchant_register',compact('userstatuses','workingstatuses','educationlevels'));
 })->name('registermerchant');
 
-Auth::routes();
+Auth::routes();//(['verify' => true]);//verify users
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware(['auth', 'verified'])->name('home');
+
 
 //Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
-Route::group(['prefix' => 'admin'], function()
+Route::group(['prefix' => 'admin','middleware' => ['auth','adminUser','verified']], function()
 
 {
+    Route::get('/','OrderController@index');
+
     Route::resource('educationlevels','EducationlevelController');
     Route::resource('disciplines','DisciplineController');
     Route::resource('orderstatuses','OrderstatusController');
     Route::resource('userdocumenttypes','UserdocumenttypeController');
+    Route::resource('userdocuments','UserdocumentController');
+
     Route::resource('citations','CitationController');
     Route::resource('documenttypes','DocumenttypeController');
     Route::resource('addresses','AddressController');
@@ -67,99 +104,44 @@ Route::group(['prefix' => 'admin'], function()
     Route::resource('users','UserController');
     Route::resource('orders','OrderController');
 });
-/*
-
-Route::resource('admin/educationlevels','EducationlevelController');
-Route::resource('admin/disciplines','DisciplineController');
-Route::resource('admin/orderstatuses','OrderstatusController');
-Route::resource('admin/userdocumenttypes','UserdocumenttypeController');
-Route::resource('admin/citations','CitationController');
-Route::resource('admin/documenttypes','DocumenttypeController');
-Route::resource('admin/addresses','AddressController');
-Route::resource('admin/payments','PaymentController');
-Route::resource('admin/paymentmethods','PaymentmethodController');
-Route::resource('admin/paymentstatuses','PaymentstatusController');
-Route::resource('admin/roles','RoleController');
-Route::resource('admin/transactions','TransactionController');
-Route::resource('admin/transactionmethods','TransactionmethodController');
-Route::resource('admin/transactionstatuses','TransactionstatusController');
-Route::resource('admin/transactiontypes','TransactiontypeController');
-Route::resource('admin/typeofworks','TypeofworkController');
-Route::resource('admin/workingstatuses','WorkingstatusController');
-Route::resource('admin/userstatuses','UserstatusController');
-Route::resource('admin/conversations','ConversationController');
-Route::resource('admin/replies','ReplyController');
-Route::resource('admin/documents','DocumentController');
-Route::resource('admin/users','UserController');
-Route::resource('admin/orders','OrderController');
-
-*/
-
-
-//Route::match(['post','put'],'/admin/educationlevels','EducationlevelController@update');
-
-
-/*
-
-Route::group(['prefix'=>'admin'],function(){
-    Route::get('/', function(){ 
-        return view('admin.dashboard');
-    });
-    Route::get('users', 'UserController@index');
-    Route::post('users/create', 'UserController@create');
-    //Route::post('users/store', 'UserController@store');
-    //Route::match(['get', 'post'],'users/store', 'UserController@store');
-    
-    //Route::match(['get','put'],'educationlevels','EducationlevelController@update');
-
-    //Route::get('educationlevels','EducationlevelController@update');
-
-    Route::resource('educationlevels','EducationlevelController');
-
-
-    
-  //  Route::get('educationlevels', 'EducationlevelController@index');
-   // Route::get('educationlevels/create', 'EducationlevelController@create');
-    //Route::match(['get','post'],'educationlevels/store','EducationlevelController@store');
-    //Route::get('educationlevels/show/{id}', 'EducationlevelController@show');
-
-
-    //Route::resources(['users'=>'UserController', 'transactions'=>'TransactionController']);
-});
-
-
-*/
 
 
 
 
-
-
-
-
-Route::group(['prefix'=>'manager'],function(){
+Route::group(['prefix'=>'manager', 'middleware'=>['auth','managerUser']],function(){
     Route::get('/', function(){ return view('manager.dashboard');});
 
 });
-Route::group(['prefix'=>'officer','middleware'=>'officer'],function(){
+Route::group(['prefix'=>'officer','middleware'=>['auth','officerUser']],function(){
     Route::get('/', function(){ return view('officer.dashboard');});
 
 });
 
-Route::group(['prefix'=>'customer'],function(){
+Route::group(['prefix'=>'customer', 'middleware'=>['auth','customerUser']],function(){
     Route::resource('customer', 'Customer\CustomerController');
+    Route::resource('order','CustomerOrderController');
+
    // Route::get('customer/take/{id}','Merchant\MerchantController@take');
+   Route::get('blog/news', function(){ return view('customer.blog.news');});
+
 
 });
-Route::group(['prefix'=>'merchant'],function(){
+Route::group(['prefix'=>'merchant', 'middleware'=>['auth','merchantUser']],function(){
     //Route::get('/', function(){ return view('merchant.dashboard');});
     Route::resource('merchant','Merchant\MerchantController');
 
     Route::get('merchant/take/{id}','Merchant\MerchantController@take');
 
+    Route::get('blog/news', function(){ return view('merchant.blog.news');});
+
 
 });
+
 Route::group(['prefix'=>'public'],function(){
     Route::get('/', function(){ return view('public.dashboard');});
+    Route::get('/blog/news', function(){ return view('public.dashboard');});
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

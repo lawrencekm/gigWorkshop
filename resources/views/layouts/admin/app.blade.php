@@ -45,7 +45,7 @@
 <body>
 <div class="jumbotron text-center" style="margin-bottom:0px">
   <h3>WEZAWORKSHOP</h3>
-  <p>“Hustle beats talent when talent doesn’t hustle” – Ross!</p> 
+  <p>“I am the master of my trade. I strive to make this environment clean and healthy” – Superadmin {{ Auth::user()->firstname }} I am!</p> 
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -95,7 +95,7 @@
       @endguest
 
       <li style="float:right" class="nav-item">
-          <span  class="nav-link"  >Hi,{{-- Auth::user()->firstname --}} . Your Time: </span>
+          <span  class="nav-link"  >Hi,{{ Auth::user()->firstname }} . Your Time: </span>
       </li> 
   </ul>
 

@@ -46,6 +46,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_login');
             $table->rememberToken();
             $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
+
             $table->engine = 'InnoDB';
         });
     }

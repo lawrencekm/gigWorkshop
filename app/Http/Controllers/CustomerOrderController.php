@@ -1,7 +1,6 @@
 <?php
 
 namespace Wezaworkshop\Http\Controllers;
-
 use Wezaworkshop\Order;
 use Wezaworkshop\Role;
 use Wezaworkshop\Document;
@@ -11,8 +10,7 @@ use DB;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
-
-class OrderController extends Controller
+class CustomerOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +20,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('admin.orders.index', compact('orders'));
+        return view('customer.orders.index', compact('orders'));
         //
     }
 
@@ -34,7 +32,7 @@ class OrderController extends Controller
     public function create()
     {
         //
-        return view('admin.orders.create');
+        return view('customer.orders.create');
     }
 
     /**
@@ -88,7 +86,7 @@ class OrderController extends Controller
         $order->rating_by_merchant = $request->rating_by_merchant;
         $order->save();
 
-        return redirect('admin/orders');
+        return redirect('customer/orders');
 
     }
 
@@ -101,7 +99,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
-        return view('admin.orders.show',compact('order'));
+        return view('customer.orders.show',compact('order'));
     }
 
     /**
@@ -138,7 +136,7 @@ class OrderController extends Controller
         
 
 
-        return view('admin.orders.edit',compact('order','typeofworks','citations','educationlevels','orderstatuses','merchants',
+        return view('customer.orders.edit',compact('order','typeofworks','citations','educationlevels','orderstatuses','merchants',
         'customers','transactionstatuses','paymentstatuses','documenttypes','documents','allusers','disciplines'));
 
 
@@ -251,9 +249,9 @@ class OrderController extends Controller
        // dd($path;);
 
 
-        $request->session()->flash('message', 'Successfully modified the order!');
+        $request->session()->flash('message', 'Successfully modified your order!');
 
-        return redirect('admin/orders/'.$order->id);
+        return redirect('customer/order/'.$order->id.'/edit');
 
     }
 
@@ -267,8 +265,7 @@ class OrderController extends Controller
     {
         //
         $order->delete();
-        return redirect('admin/orders');
+        return redirect('customer/orders');
     }
 
-    
 }

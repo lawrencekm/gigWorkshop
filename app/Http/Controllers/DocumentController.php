@@ -4,6 +4,10 @@ namespace Wezaworkshop\Http\Controllers;
 
 use Wezaworkshop\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
+
 
 class DocumentController extends Controller
 {
@@ -47,6 +51,11 @@ class DocumentController extends Controller
     public function show(Document $document)
     {
         //
+        if(File::exists(base_path() . "/storage/app/" . $document->name)){           
+            return response()->download(base_path() . "/storage/app/" . $document->name);
+        }
+
+
     }
 
     /**
@@ -81,5 +90,12 @@ class DocumentController extends Controller
     public function destroy(Document $document)
     {
         //
+
+        if(File::exists(base_path() . "/storage/app/" . $document->name)){
+           File::delete(base_path() . "/storage/app/" . $document->name);
+        }
+        $document->delete();
+        return redirect('admin/orders/');
+        //return redirect('admin/orders/' . $order->id . '/edit');
     }
 }

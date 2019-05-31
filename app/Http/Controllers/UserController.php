@@ -153,7 +153,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //$orders = Wezaworkshop\User::find(1)->orders;
+//$user = order::find(1)->user;
         $userstatuses = DB::table('userstatuses')->pluck('name','id')->toArray();
         $workingstatuses = DB::table('workingstatuses')->pluck('name','id')->toArray();
         $educationlevels = DB::table('educationlevels')->pluck('name','id')->toArray();

@@ -46,7 +46,7 @@
 <body>
 <div class="jumbotron text-center" style="margin-bottom:0px">
   <h3>WEZAWORKSHOP</h3>
-  <p>“Hustle beats talent when talent doesn’t hustle” – Ross!</p> 
+  <p>{{ Auth::user()->firstname}}, hustle beats talent when talent doesn’t hustle – Ross!</p> 
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -60,7 +60,7 @@
         <a class="nav-link" href="#">My Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">News</a>
+        <a class="nav-link" href="blog/news">News</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Billing</a>

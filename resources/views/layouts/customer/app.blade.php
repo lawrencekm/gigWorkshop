@@ -46,7 +46,7 @@
 <body>
 <div class="jumbotron text-center" style="margin-bottom:0px">
   <h3>WEZAWORKSHOP</h3>
-  <p>"your most complex task is a cinch to our talented freelancers"</p> 
+  <p>{{ Auth::user()->firstname}}, your most complex task is a cinch to our talented freelancers !</p> 
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -65,9 +65,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Billing</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Resources</a>
-      </li>
+
       
       @guest
 
