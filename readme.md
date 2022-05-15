@@ -1,58 +1,80 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# gigWorkshop™
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+[![Release](https://img.shields.io/github/v/release/gigWorkshop/gigWorkshop?label=release)](https://github.com/gigWorkshop/gigWorkshop/releases)
+![Downloads]()
+[![Translations](https://badges.crowdin.net/gigWorkshop/localized.svg)](https://crowdin.com/project/gigWorkshop)
+[![Tests](https://img.shields.io/github/workflow/status/gigWorkshop/gigWorkshop/Tests?label=tests)](https://github.com/gigWorkshop/gigWorkshop/actions)
+[![License](https://img.shields.io/github/license/gigWorkshop/gigWorkshop?label=license)](LICENSE.txt)
 
-## About Laravel
+gigWorkshop is a free, open source and online accounting software designed for small businesses and freelancers. It is built with modern technologies such as Laravel, VueJS, Bootstrap 4, RESTful API etc. Thanks to its modular structure, gigWorkshop provides an awesome App Store for users and developers.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+* [Home](https://gigWorkshop.com) - The house of gigWorkshop
+* [Forum](https://gigWorkshop.com/forum) - Ask for support
+* [Documentation](https://lottery.com/docs) - Learn how to use
+* [Developer Portal](https://developer.gigWorkshop.com) - Generate passive income
+* [App Store](https://gigWorkshop.com/apps) - Extend your gigWorkshop
+* [Translations](https://crowdin.com/project/gigWorkshop) - Help us translate gigWorkshop
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+* PHP 7.3 or higher
+* Database (eg: MySQL, PostgreSQL, SQLite)
+* Web Server (eg: Apache, Nginx, IIS)
+* [Other libraries](https://gigWorkshop.com/docs/requirements)
 
-## Learning Laravel
+## Framework
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+gigWorkshop uses [Laravel](http://laravel.com), the best existing PHP framework, as the foundation framework and [Module](https://github.com/gigWorkshop/module) package for Apps.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+* Install [Composer](https://getcomposer.org/download) and [Npm](https://nodejs.org/en/download)
+* Clone the repository: `git clone https://github.com/gigWorkshop/gigWorkshop.git`
+* Install dependencies: `composer install ; npm install ; npm run dev`
+* Install gigWorkshop:
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+```bash
+php artisan install --db-name="gigWorkshop" --db-username="root" --db-password="pass" --admin-email="admin@company.com" --admin-password="123456"
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+* Create sample data (optional): `php artisan sample-data:seed`
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Please, be very clear on your commit messages and pull requests, empty pull request messages may be rejected without reason.
 
-## Security Vulnerabilities
+When contributing code to gigWorkshop, you must follow the PSR coding standards. The golden rule is: Imitate the existing gigWorkshop code.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Please note that this project is released with a [Contributor Code of Conduct](https://gigWorkshop.com/conduct). By participating in this project you agree to abide by its terms.
+
+## Translation
+
+If you'd like to contribute translations, please check out our [Crowdin](https://crowdin.com/project/gigWorkshop) project.
+
+## Changelog
+
+Please see [Releases](../../releases) for more information what has changed recently.
+
+## Security
+
+Please review [our security policy](https://github.com/gigWorkshop/gigWorkshop/security/policy) on how to report security vulnerabilities.
+
+## Credits
+
+* [Denis Duliçi](https://github.com/denisdulici)
+* [Cüneyt Şentürk](https://github.com/cuneytsenturk)
+* [All Contributors](../../contributors)
+
+## Partners
+
+Each of our partners can help you craft a beautiful, well-architected project. Feel free to get in [contact](https://gigWorkshop.com/contact) with us to become a partner.
+
+* [Creative Tim](https://www.creative-tim.com) is our design partner since gigWorkshop 2.0 version. They create beautiful UI Kits, Templates, and Dashboards built on top of Bootstrap, Vue.js, React, Angular, Node.js, and Laravel.
+
+## Sponsors
+
+Support gigWorkshop by becoming a sponsor on [Patreon](https://www.patreon.com/gigWorkshop). Your logo will show up here with a link to your website.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+gigWorkshop is released under the [GPLv3 license](LICENSE.txt).
